@@ -1,50 +1,244 @@
 <!DOCTYPE html>
 <html lang="id" class="h-full">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Petualangan Trigonometri - Lab Interaktif SMA/MA/SMK</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js">
+    </script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
                     colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            900: '#1e3a8a',
-                        },
-                        cyanBrand: {
-                            500: '#06b6d4',
-                            600: '#0891b2',
-                        }
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' },
+                        cyanBrand: { 500: '#06b6d4', 600: '#0891b2' }
                     }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.6); }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .glow-card { animation: pulseGlow 4s infinite; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+            }
+        }
+        .glow-card {
+            animation: pulseGlow 4s infinite;
+        }
+
+        /* Login overlay */
+        #login-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at 50% 50%, #1e293b 0%, #0f172a 100%);
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #login-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #login-overlay .login-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            max-width: 440px;
+            width: 94%;
+            border-radius: 2.5rem;
+            padding: 2.5rem 2rem;
+            transition: transform 0.4s ease;
+        }
+        #login-overlay .login-card:hover {
+            transform: scale(1.005);
+        }
+        .login-input {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f1f5f9;
+            border-radius: 1.25rem;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            width: 100%;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .login-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+        }
+        .login-input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+            font-weight: 400;
+        }
+        .login-btn {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border: none;
+            border-radius: 1.5rem;
+            padding: 0.9rem 1.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 28px rgba(59, 130, 246, 0.35);
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(59, 130, 246, 0.50);
+        }
+        .login-btn:active {
+            transform: scale(0.97);
+        }
+        .login-error {
+            color: #f87171;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            text-align: center;
+            min-height: 1.25rem;
+        }
+
+        /* header user info */
+        .user-badge {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 2rem;
+            padding: 0.2rem 1rem 0.2rem 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .user-badge .initial {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .user-badge .info {
+            line-height: 1.2;
+        }
+        .user-badge .info .name {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #f1f5f9;
+        }
+        .user-badge .info .class {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+        .logout-btn-sm {
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .logout-btn-sm:hover {
+            background: rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+        }
+
+        /* responsive tweaks */
+        @media (max-width: 640px) {
+            #login-overlay .login-card {
+                padding: 2rem 1.25rem;
+                border-radius: 2rem;
+            }
+            .user-badge .info .name {
+                font-size: 0.7rem;
+            }
+            .user-badge .info .class {
+                font-size: 0.55rem;
+            }
+        }
     </style>
 </head>
 <body class="h-full bg-slate-50 text-slate-800 flex flex-col overflow-hidden">
 
+    <!-- ===== LOGIN OVERLAY ===== -->
+    <div id="login-overlay">
+        <div class="login-card">
+            <div class="text-center mb-7">
+                <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white text-3xl shadow-2xl shadow-blue-500/30 mx-auto mb-4">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                </div>
+                <h2 class="text-white text-2xl font-extrabold tracking-tight">TrigoLab</h2>
+                <p class="text-slate-400 text-sm font-medium mt-1">Petualangan Trigonometri TERPADU</p>
+                <div class="mt-3 h-0.5 w-16 mx-auto bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
+            </div>
+
+            <form id="login-form" autocomplete="off">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-slate-300 text-xs font-semibold uppercase tracking-wider mb-1.5">Nama Lengkap</label>
+                        <input type="text" id="login-name" class="login-input" placeholder="Contoh: Rizky Ahmad" required />
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-xs font-semibold uppercase tracking-wider mb-1.5">Kelas</label>
+                        <input type="text" id="login-class" class="login-input" placeholder="Contoh: XI MIPA 2" required />
+                    </div>
+                </div>
+
+                <div class="login-error" id="login-error"></div>
+
+                <button type="submit" class="login-btn mt-6">
+                    <i class="fa-solid fa-rocket mr-2"></i> Mulai Petualangan
+                </button>
+
+                <p class="text-slate-500 text-[10px] text-center mt-4 font-medium tracking-wide">
+                    <i class="fa-regular fa-circle-check text-emerald-400 mr-1"></i> Progress disimpan per siswa
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== MAIN APP ===== -->
     <header class="bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between shrink-0 shadow-sm z-20">
         <div class="flex items-center space-x-3">
             <button id="sidebar-toggle" class="md:hidden text-slate-600 hover:text-blue-600 focus:outline-none p-1">
@@ -60,21 +254,28 @@
                 </div>
             </div>
         </div>
+
+        <!-- Header Right: Stats + User -->
         <div class="flex items-center space-x-4">
             <div class="hidden sm:flex items-center space-x-3 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-medium">
-                <span class="flex items-center text-amber-600 font-bold"><i class="fa-solid fa-star mr-1"></i> <span id="stat-xp">120</span> XP</span>
+                <span class="flex items-center text-amber-600 font-bold"><i class="fa-solid fa-star mr-1"></i> <span id="stat-xp">0</span> XP</span>
                 <span class="text-slate-300">|</span>
-                <span class="flex items-center text-blue-600 font-bold"><i class="fa-solid fa-fire mr-1"></i> <span id="stat-streak">3</span> Hari Streak</span>
+                <span class="flex items-center text-blue-600 font-bold"><i class="fa-solid fa-fire mr-1"></i> <span id="stat-streak">0</span> Hari</span>
                 <span class="text-slate-300">|</span>
-                <span class="text-slate-700 font-bold"><span id="stat-badges">2</span> Badge</span>
+                <span class="text-slate-700 font-bold"><span id="stat-badges">0</span> Badge</span>
             </div>
+
+            <!-- User Badge (dinamis) -->
             <div class="flex items-center space-x-2">
-                <div class="w-9 h-9 rounded-full bg-blue-100 border-2 border-blue-500 flex items-center justify-center text-blue-700 font-bold text-sm">
-                    <span id="user-initial">RA</span>
-                </div>
-                <div class="hidden lg:block text-left">
-                    <p class="text-xs font-bold text-slate-800" id="user-display-name">Rizky Ahmad</p>
-                    <p class="text-[10px] text-slate-500">Junior Surveyor</p>
+                <div id="user-badge-container" class="user-badge">
+                    <div class="initial" id="user-initial">RA</div>
+                    <div class="info">
+                        <div class="name" id="user-display-name">—</div>
+                        <div class="class" id="user-display-class">—</div>
+                    </div>
+                    <button id="logout-btn-header" class="logout-btn-sm" title="Keluar / Ganti Akun">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -86,13 +287,13 @@
             <div class="p-4 border-b border-slate-100">
                 <div class="flex items-center justify-between mb-2">
                     <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Progress Belajar</span>
-                    <span class="text-xs font-bold text-blue-600" id="overall-progress-text">25%</span>
+                    <span class="text-xs font-bold text-blue-600" id="overall-progress-text">0%</span>
                 </div>
                 <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                    <div id="overall-progress-bar" class="bg-gradient-to-r from-blue-600 to-cyan-500 h-full rounded-full transition-all duration-500" style="width: 25%;"></div>
+                    <div id="overall-progress-bar" class="bg-gradient-to-r from-blue-600 to-cyan-500 h-full rounded-full transition-all duration-500" style="width:0%;"></div>
                 </div>
             </div>
-            
+
             <nav class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-1 text-sm font-medium">
                 <button onclick="router.navigate('dashboard')" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition group active" data-target="dashboard">
                     <div class="flex items-center space-x-3">
@@ -197,6 +398,7 @@
                     </div>
                 </button>
             </nav>
+
             <div class="p-3 border-t border-slate-100 bg-slate-50/50">
                 <div class="bg-gradient-to-r from-blue-900 to-slate-900 text-white rounded-xl p-3 text-xs shadow-inner">
                     <div class="flex items-center space-x-2 mb-1">
@@ -209,23 +411,32 @@
             </div>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <main class="flex-1 bg-slate-100 overflow-y-auto custom-scrollbar flex flex-col">
             <div id="view-container" class="flex-1 p-4 md:p-8 max-w-7xl w-full mx-auto">
-                <!-- Dynamically Rendered Views injected here -->
+                <!-- Views injected here -->
             </div>
         </main>
     </div>
 
     <script>
-        // App State
-        const state = {
-            xp: 120,
-            streak: 3,
-            badges: 2,
-            completedModules: ['telaah'],
-            userName: "Rizky Ahmad",
-            activeMission: "Telaah Fenomena Tiang Bendera",
+        // ============================================================
+        //  STORAGE KEYS
+        // ============================================================
+        const STORAGE_KEY_CURRENT = 'trigolab_current_user';
+        const STORAGE_KEY_PROGRESS_PREFIX = 'trigolab_progress_';
+
+        // ============================================================
+        //  STATE (loaded from localStorage)
+        // ============================================================
+        let state = {
+            xp: 0,
+            streak: 0,
+            badges: 0,
+            completedModules: [],
+            userName: '',
+            userClass: '',
+            activeMission: 'Telaah Fenomena Tiang Bendera',
             explorationAngle: 35,
             explorationBase: 10,
             calcMode: 'sin',
@@ -236,13 +447,166 @@
             simEyeHeight: 1.6
         };
 
-        // Router View Controller
+        // ============================================================
+        //  STUDENT DATA HELPERS
+        // ============================================================
+        function getStudentKey(name, cls) {
+            return STORAGE_KEY_PROGRESS_PREFIX + (name + '_' + cls).replace(/\s+/g, '_').toLowerCase();
+        }
+
+        function loadStudentData(name, cls) {
+            const key = getStudentKey(name, cls);
+            const raw = localStorage.getItem(key);
+            if (raw) {
+                try {
+                    const data = JSON.parse(raw);
+                    // merge with default state
+                    return { ...state, ...data, userName: name, userClass: cls };
+                } catch (_) { /* ignore */ }
+            }
+            // default new student
+            return { ...state, userName: name, userClass: cls, xp: 0, streak: 0, badges: 0, completedModules: [] };
+        }
+
+        function saveStudentData(st) {
+            const key = getStudentKey(st.userName, st.userClass);
+            const toStore = { ...st };
+            // don't store these keys separately (they're already in the key)
+            // but we keep them for display
+            localStorage.setItem(key, JSON.stringify(toStore));
+            // also store current user
+            localStorage.setItem(STORAGE_KEY_CURRENT, JSON.stringify({ name: st.userName, class: st.userClass }));
+        }
+
+        function getCurrentUser() {
+            const raw = localStorage.getItem(STORAGE_KEY_CURRENT);
+            if (raw) {
+                try { return JSON.parse(raw); } catch (_) { /* ignore */ }
+            }
+            return null;
+        }
+
+        // ============================================================
+        //  LOGIN / LOGOUT
+        // ============================================================
+        function loginStudent(name, cls) {
+            if (!name.trim() || !cls.trim()) {
+                document.getElementById('login-error').textContent = 'Nama dan Kelas wajib diisi!';
+                return false;
+            }
+            // load or init state
+            const loaded = loadStudentData(name.trim(), cls.trim());
+            Object.assign(state, loaded);
+            saveStudentData(state);
+            updateUI();
+            document.getElementById('login-overlay').classList.add('hidden');
+            router.navigate('dashboard');
+            return true;
+        }
+
+        function logoutStudent() {
+            // save current state first
+            saveStudentData(state);
+            localStorage.removeItem(STORAGE_KEY_CURRENT);
+            // reset state to defaults
+            Object.assign(state, { xp: 0, streak: 0, badges: 0, completedModules: [], userName: '', userClass: '' });
+            updateUI();
+            document.getElementById('login-overlay').classList.remove('hidden');
+            document.getElementById('login-name').value = '';
+            document.getElementById('login-class').value = '';
+            document.getElementById('login-error').textContent = '';
+            // reset nav highlight
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('bg-blue-50', 'text-blue-600', 'font-bold');
+                el.classList.add('text-slate-700');
+            });
+        }
+
+        // ============================================================
+        //  UPDATE UI (header, stats, etc)
+        // ============================================================
+        function updateUI() {
+            // Stats
+            document.getElementById('stat-xp').textContent = state.xp;
+            document.getElementById('stat-streak').textContent = state.streak;
+            document.getElementById('stat-badges').textContent = state.badges;
+            const pct = Math.min(100, Math.round((state.completedModules.length / 7) * 100));
+            document.getElementById('overall-progress-text').textContent = pct + '%';
+            document.getElementById('overall-progress-bar').style.width = pct + '%';
+
+            // User badge
+            const initial = (state.userName || '?').substring(0, 2).toUpperCase() || '?';
+            document.getElementById('user-initial').textContent = initial;
+            document.getElementById('user-display-name').textContent = state.userName || '—';
+            document.getElementById('user-display-class').textContent = state.userClass || '—';
+
+            // Sidebar mission desc
+            if (state.completedModules.length === 0) {
+                document.getElementById('sidebar-mission-desc').textContent = 'Mulai petualanganmu dari Misi Telaah!';
+            } else if (state.completedModules.includes('ukhrowi')) {
+                document.getElementById('sidebar-mission-desc').textContent = '🎉 Selamat! Kamu telah menyelesaikan semua misi!';
+            } else {
+                const next = getNextMission();
+                document.getElementById('sidebar-mission-desc').textContent = next ? next.desc : 'Jelajahi semua misi!';
+            }
+        }
+
+        function getNextMission() {
+            const all = ['telaah', 'eksplorasi', 'rumuskan', 'presentasikan', 'aplikasikan', 'duniawi', 'ukhrowi'];
+            const done = state.completedModules || [];
+            for (const m of all) {
+                if (!done.includes(m)) {
+                    const names = {
+                        telaah: { desc: 'Telaah — Amati fenomena tiang bendera' },
+                        eksplorasi: { desc: 'Eksplorasi — Lab segitiga interaktif' },
+                        rumuskan: { desc: 'Rumuskan — Temukan pola Sin/Cos/Tan' },
+                        presentasikan: { desc: 'Presentasikan — Urutan langkah berpikir' },
+                        aplikasikan: { desc: 'Aplikasikan — Simulasi 5 benda nyata' },
+                        duniawi: { desc: 'Duniawi — Penerapan di teknologi & profesi' },
+                        ukhrowi: { desc: 'Ukhrowi — Refleksi keteraturan ciptaan' }
+                    };
+                    return names[m] || { desc: 'Lanjutkan misi berikutnya' };
+                }
+            }
+            return null;
+        }
+
+        // ============================================================
+        //  ADD XP & PROGRESS
+        // ============================================================
+        function addXP(amount, missionName) {
+            state.xp += amount;
+            if (missionName && !state.completedModules.includes(missionName)) {
+                state.completedModules.push(missionName);
+                state.badges += 1;
+                // bonus streak logic (simplified)
+                state.streak += 1;
+            }
+            saveStudentData(state);
+            updateUI();
+            showToast(`+${amount} XP 🏆 Badge ditambahkan!`);
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className =
+                'fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center space-x-3 border border-slate-700 animate-bounce';
+            toast.innerHTML =
+                `<i class="fa-solid fa-award text-amber-400 text-xl"></i><div><p class="font-bold text-xs">Pencapaian Baru</p><p class="text-xs text-slate-300">${message}</p></div>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        // ============================================================
+        //  ROUTER
+        // ============================================================
         const router = {
             current: 'dashboard',
             navigate(viewName) {
+                if (!state.userName) return; // safety
                 this.current = viewName;
                 document.querySelectorAll('.nav-item').forEach(el => {
-                    if(el.dataset.target === viewName) {
+                    if (el.dataset.target === viewName) {
                         el.classList.add('bg-blue-50', 'text-blue-600', 'font-bold');
                         el.classList.remove('text-slate-700');
                     } else {
@@ -251,484 +615,420 @@
                     }
                 });
                 renderView(viewName);
-                // Close mobile sidebar if open
+                // close mobile sidebar
                 const sidebar = document.getElementById('sidebar');
-                if(!sidebar.classList.contains('-translate-x-full')) {
+                if (!sidebar.classList.contains('-translate-x-full')) {
                     sidebar.classList.add('-translate-x-full');
                 }
             }
         };
 
-        // Mobile Sidebar Toggle
-        document.getElementById('sidebar-toggle').addEventListener('click', () => {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('-translate-x-full');
-        });
-
-        // Helper to update stats UI
-        function updateStatsUI() {
-            document.getElementById('stat-xp').innerText = state.xp;
-            document.getElementById('stat-streak').innerText = state.streak;
-            document.getElementById('stat-badges').innerText = state.badges;
-            const percentage = Math.round((state.completedModules.length / 7) * 100);
-            document.getElementById('overall-progress-text').innerText = `${percentage}%`;
-            document.getElementById('overall-progress-bar').style.width = `${percentage}%`;
-        }
-
-        function addXP(amount, missionName) {
-            state.xp += amount;
-            if(!state.completedModules.includes(missionName)) {
-                state.completedModules.push(missionName);
-                state.badges += 1;
-            }
-            updateStatsUI();
-            showToast(`+${amount} XP Diperoleh! 🏆 Badge Ditambahkan!`);
-        }
-
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center space-x-3 border border-slate-700 animate-bounce';
-            toast.innerHTML = `<i class="fa-solid fa-award text-amber-400 text-xl"></i><div><p class="font-bold text-xs">Pencapaian Baru</p><p class="text-xs text-slate-300">${message}</p></div>`;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 4000);
-        }
-
-        // View Render Functions
+        // ============================================================
+        //  RENDER VIEWS (only the ones that need changes)
+        // ============================================================
         function renderView(name) {
             const container = document.getElementById('view-container');
-            switch(name) {
-                case 'dashboard': container.innerHTML = getDashboardHTML(); break;
-                case 'telaah': container.innerHTML = getTelaahHTML(); initTelaahScript(); break;
-                case 'eksplorasi': container.innerHTML = getEksplorasiHTML(); initEksplorasiCanvas(); break;
-                case 'rumuskan': container.innerHTML = getRumuskanHTML(); initRumuskanScript(); break;
-                case 'presentasikan': container.innerHTML = getPresentasikanHTML(); initPresentasikanScript(); break;
-                case 'aplikasikan': container.innerHTML = getAplikasiHTML(); initAplikasiScript(); break;
-                case 'duniawi': container.innerHTML = getDuniawiHTML(); break;
-                case 'ukhrowi': container.innerHTML = getUkhrowiHTML(); break;
-                case 'evaluasi': container.innerHTML = getEvaluasiHTML(); initEvaluasiScript(); break;
-                case 'kalkulator': container.innerHTML = getKalkulatorHTML(); initKalkulatorScript(); break;
-                default: container.innerHTML = getDashboardHTML();
+            switch (name) {
+                case 'dashboard':
+                    container.innerHTML = getDashboardHTML();
+                    break;
+                case 'telaah':
+                    container.innerHTML = getTelaahHTML();
+                    initTelaahScript();
+                    break;
+                case 'eksplorasi':
+                    container.innerHTML = getEksplorasiHTML();
+                    initEksplorasiCanvas();
+                    break;
+                case 'rumuskan':
+                    container.innerHTML = getRumuskanHTML();
+                    initRumuskanScript();
+                    break;
+                case 'presentasikan':
+                    container.innerHTML = getPresentasikanHTML();
+                    initPresentasikanScript();
+                    break;
+                case 'aplikasikan':
+                    container.innerHTML = getAplikasiHTML();
+                    initAplikasiScript();
+                    break;
+                case 'duniawi':
+                    container.innerHTML = getDuniawiHTML();
+                    break;
+                case 'ukhrowi':
+                    container.innerHTML = getUkhrowiHTML();
+                    break;
+                case 'evaluasi':
+                    container.innerHTML = getEvaluasiHTML();
+                    initEvaluasiScript();
+                    break;
+                case 'kalkulator':
+                    container.innerHTML = getKalkulatorHTML();
+                    initKalkulatorScript();
+                    break;
+                default:
+                    container.innerHTML = getDashboardHTML();
             }
+            // re-bind event listeners that use inline onclick are fine
         }
 
-        // DASHBOARD VIEW
+        // ============================================================
+        //  DASHBOARD (with student name)
+        // ============================================================
         function getDashboardHTML() {
+            const pct = Math.min(100, Math.round((state.completedModules.length / 7) * 100));
             return `
-                <div class="space-y-6">
-                    <div class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
-                        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-                        <div class="space-y-3 z-10 max-w-xl">
-                            <span class="bg-blue-500/55 border border-blue-400/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block">Misi Pengukur • Trigonometri SMA</span>
-                            <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Petualangan Trigonometri</h2>
-                            <p class="text-blue-100 text-sm leading-relaxed">Temukan bagaimana sudut dan perbandingan sisi dapat membantu kita mengukur sesuatu yang sulit dijangkau secara langsung tanpa harus memanjat atau meraba dalam gelap.</p>
-                            <div class="pt-2 flex flex-wrap gap-3">
-                                <button onclick="router.navigate('telaah')" class="bg-white text-blue-700 hover:bg-blue-50 font-bold px-5 py-2.5 rounded-xl shadow-lg transition flex items-center space-x-2 text-sm">
-                                    <i class="fa-solid fa-play"></i><span>Lanjutkan Misi Telaah</span>
-                                </button>
-                                <button onclick="router.navigate('eksplorasi')" class="bg-blue-500/40 hover:bg-blue-500/60 border border-white/20 text-white font-bold px-5 py-2.5 rounded-xl transition flex items-center space-x-2 text-sm">
-                                    <i class="fa-solid fa-flask"><span>Lab Eksplorasi</span></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mt-6 md:mt-0 z-10 bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 text-center min-w-[200px]">
-                            <p class="text-xs text-blue-200 font-medium">Progress Keseluruhan</p>
-                            <div class="text-3xl font-extrabold my-1">${Math.round((state.completedModules.length/7)*100)}%</div>
-                            <p class="text-[11px] text-blue-300">${state.completedModules.length} dari 7 Modul Selesai</p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-trophy"></i></div>
-                            <div>
-                                <p class="text-xs text-slate-400 font-semibold">Total XP Kamu</p>
-                                <h3 class="text-xl font-extrabold text-slate-800">${state.xp} XP</h3>
-                                <p class="text-[10px] text-emerald-600 font-medium">Level 2: Junior Surveyor</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-fire"></i></div>
-                            <div>
-                                <p class="text-xs text-slate-400 font-semibold">Streak Belajar</p>
-                                <h3 class="text-xl font-extrabold text-slate-800">${state.streak} Hari Beruntun</h3>
-                                <p class="text-[10px] text-blue-600 font-medium">Pertahankan konsistensimu!</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-medal"></i></div>
-                            <div>
-                                <p class="text-xs text-slate-400 font-semibold">Badge Diperoleh</p>
-                                <h3 class="text-xl font-extrabold text-slate-800">${state.badges} Badge</h3>
-                                <p class="text-[10px] text-purple-600 font-medium">Penemu Pola & Pemecah Masalah</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center"><i class="fa-solid fa-map-location-dot mr-2 text-blue-600"></i> Peta Misi TERPADU</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <!-- Card Telaah -->
-                            <div onclick="router.navigate('telaah')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-blue-500 hover:shadow-lg transition cursor-pointer group flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-3">
-                                        <span class="text-xs font-extrabold px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-lg">Misi 1 • Telaah</span>
-                                        <i class="fa-solid fa-binoculars text-emerald-500 text-lg group-hover:scale-110 transition"></i>
-                                    </div>
-                                    <h4 class="font-bold text-slate-900 mb-1">Amati Fenomena Nyata</h4>
-                                    <p class="text-xs text-slate-500">Bagaimana cara mengukur tinggi tiang bendera tanpa memanjat?</p>
-                                </div>
-                                <div class="mt-4 flex items-center justify-between text-xs font-semibold text-blue-600">
-                                    <span>Mulai Telaah</span>
-                                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
-                                </div>
-                            </div>
-                            <!-- Card Eksplorasi -->
-                            <div onclick="router.navigate('eksplorasi')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-blue-500 hover:shadow-lg transition cursor-pointer group flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-3">
-                                        <span class="text-xs font-extrabold px-2.5 py-1 bg-cyan-50 text-cyan-600 rounded-lg">Misi 2 • Eksplorasi</span>
-                                        <i class="fa-solid fa-flask text-cyan-500 text-lg group-hover:scale-110 transition"></i>
-                                    </div>
-                                    <h4 class="font-bold text-slate-900 mb-1">Lab Segitiga Interaktif</h4>
-                                    <p class="text-xs text-slate-500">Geser sudut & temukan hubungan sisi depan, samping, dan miring.</p>
-                                </div>
-                                <div class="mt-4 flex items-center justify-between text-xs font-semibold text-blue-600">
-                                    <span>Masuk Lab</span>
-                                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
-                                </div>
-                            </div>
-                            <!-- Card Rumuskan -->
-                            <div onclick="router.navigate('rumuskan')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-blue-500 hover:shadow-lg transition cursor-pointer group flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-3">
-                                        <span class="text-xs font-extrabold px-2.5 py-1 bg-indigo-50 text-indigo-600 rounded-lg">Misi 3 • Rumuskan</span>
-                                        <i class="fa-solid fa-pen-nib text-indigo-500 text-lg group-hover:scale-110 transition"></i>
-                                    </div>
-                                    <h4 class="font-bold text-slate-900 mb-1">Temukan Rumus Sin/Cos/Tan</h4>
-                                    <p class="text-xs text-slate-500">Susun dan buktikan sendiri definisi SOH-CAH-TOA.</p>
-                                </div>
-                                <div class="mt-4 flex items-center justify-between text-xs font-semibold text-blue-600">
-                                    <span>Rumuskan Sekarang</span>
-                                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
-                                </div>
-                            </div>
-                            <!-- Card Aplikasikan -->
-                            <div onclick="router.navigate('aplikasikan')" class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-blue-500 hover:shadow-lg transition cursor-pointer group flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-3">
-                                        <span class="text-xs font-extrabold px-2.5 py-1 bg-violet-50 text-violet-600 rounded-lg">Misi 5 • Aplikasikan</span>
-                                        <i class="fa-solid fa-shapes text-violet-500 text-lg group-hover:scale-110 transition"></i>
-                                    </div>
-                                    <h4 class="font-bold text-slate-900 mb-1">Simulasi 5 Benda Nyata</h4>
-                                    <p class="text-xs text-slate-500">Tiang bendera, pohon, gedung, tangga, dan atap rumah.</p>
-                                </div>
-                                <div class="mt-4 flex items-center justify-between text-xs font-semibold text-blue-600">
-                                    <span>Mulai Simulasi</span>
-                                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="space-y-6">
+              <div class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+                <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="space-y-3 z-10 max-w-xl">
+                  <span class="bg-blue-500/55 border border-blue-400/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block">Halo, ${state.userName || 'Petualang'}!</span>
+                  <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Petualangan Trigonometri</h2>
+                  <p class="text-blue-100 text-sm leading-relaxed">Kelas ${state.userClass || '—'} — Temukan bagaimana sudut dan perbandingan sisi dapat membantu kita mengukur sesuatu yang sulit dijangkau secara langsung.</p>
+                  <div class="pt-2 flex flex-wrap gap-3">
+                    <button onclick="router.navigate('telaah')" class="bg-white text-blue-700 hover:bg-blue-50 font-bold px-5 py-2.5 rounded-xl shadow-lg transition flex items-center space-x-2 text-sm">
+                      <i class="fa-solid fa-play"></i><span>Lanjutkan Misi Telaah</span>
+                    </button>
+                    <button onclick="router.navigate('eksplorasi')" class="bg-blue-500/40 hover:bg-blue-500/60 border border-white/20 text-white font-bold px-5 py-2.5 rounded-xl transition flex items-center space-x-2 text-sm">
+                      <i class="fa-solid fa-flask"></i><span>Lab Eksplorasi</span>
+                    </button>
+                  </div>
                 </div>
-            `;
+                <div class="mt-6 md:mt-0 z-10 bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 text-center min-w-[200px]">
+                  <p class="text-xs text-blue-200 font-medium">Progress Kamu</p>
+                  <div class="text-3xl font-extrabold my-1">${pct}%</div>
+                  <p class="text-[11px] text-blue-300">${state.completedModules.length} dari 7 Modul Selesai</p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-trophy"></i></div>
+                  <div>
+                    <p class="text-xs text-slate-400 font-semibold">Total XP Kamu</p>
+                    <h3 class="text-xl font-extrabold text-slate-800">${state.xp} XP</h3>
+                    <p class="text-[10px] text-emerald-600 font-medium">Level: ${state.xp < 50 ? 'Pemula' : state.xp < 120 ? 'Junior Surveyor' : 'Master Surveyor'}</p>
+                  </div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-fire"></i></div>
+                  <div>
+                    <p class="text-xs text-slate-400 font-semibold">Streak Belajar</p>
+                    <h3 class="text-xl font-extrabold text-slate-800">${state.streak} Hari</h3>
+                    <p class="text-[10px] text-blue-600 font-medium">Pertahankan konsistensimu!</p>
+                  </div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-medal"></i></div>
+                  <div>
+                    <p class="text-xs text-slate-400 font-semibold">Badge Diperoleh</p>
+                    <h3 class="text-xl font-extrabold text-slate-800">${state.badges} Badge</h3>
+                    <p class="text-[10px] text-purple-600 font-medium">Penemu Pola & Pemecah Masalah</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center"><i class="fa-solid fa-map-location-dot mr-2 text-blue-600"></i> Peta Misi TERPADU</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  ${['telaah','eksplorasi','rumuskan','aplikasikan'].map(m => {
+                    const labels = { telaah:'Telaah', eksplorasi:'Eksplorasi', rumuskan:'Rumuskan', aplikasikan:'Aplikasikan' };
+                    const icons = { telaah:'fa-binoculars', eksplorasi:'fa-flask', rumuskan:'fa-pen-nib', aplikasikan:'fa-shapes' };
+                    const colors = { telaah:'emerald', eksplorasi:'cyan', rumuskan:'indigo', aplikasikan:'violet' };
+                    const descs = {
+                      telaah:'Bagaimana mengukur tinggi tiang tanpa memanjat?',
+                      eksplorasi:'Geser sudut & temukan hubungan sisi.',
+                      rumuskan:'Susun dan buktikan SOH-CAH-TOA.',
+                      aplikasikan:'Simulasi 5 benda nyata.'
+                    };
+                    const done = state.completedModules.includes(m);
+                    return `
+                      <div onclick="router.navigate('${m}')" class="bg-white p-5 rounded-2xl border ${done ? 'border-emerald-300 bg-emerald-50/40' : 'border-slate-200'} hover:border-blue-500 hover:shadow-lg transition cursor-pointer group flex flex-col justify-between">
+                        <div>
+                          <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-extrabold px-2.5 py-1 ${done ? 'bg-emerald-100 text-emerald-700' : 'bg-${colors[m]}-50 text-${colors[m]}-600'} rounded-lg">${done ? '✅ Selesai' : 'Misi ' + m}</span>
+                            <i class="fa-solid ${icons[m]} text-${colors[m]}-500 text-lg group-hover:scale-110 transition"></i>
+                          </div>
+                          <h4 class="font-bold text-slate-900 mb-1">${labels[m]}</h4>
+                          <p class="text-xs text-slate-500">${descs[m]}</p>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between text-xs font-semibold text-blue-600">
+                          <span>${done ? 'Tinjau Ulang' : 'Mulai'}</span>
+                          <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+          `;
         }
 
-        // TELAAH VIEW (Misi 1)
+        // ============================================================
+        //  TELAAH (Misi 1) – same as original with minor tweak
+        // ============================================================
         function getTelaahHTML() {
             return `
-                <div class="space-y-6 max-w-4xl mx-auto">
-                    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6">
-                        <div class="flex items-center space-x-3 mb-2">
-                            <span class="bg-emerald-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">T — TELAAH</span>
-                            <h3 class="font-extrabold text-emerald-900 text-lg">Misi 1: Misteri Tiang Bendera</h3>
-                        </div>
-                        <p class="text-sm text-emerald-800 leading-relaxed">Sebelum kita mengenal rumus sinus, cosinus, atau tangen, mari kita amati sebuah masalah di lapangan sekolah.</p>
-                    </div>
-
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
-                        <div class="flex flex-col md:flex-row gap-6 items-center">
-                            <div class="w-full md:w-1/2 bg-slate-900 rounded-2xl p-4 flex flex-col items-center justify-center relative min-h-[280px]">
-                                <div class="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-slate-900 rounded-2xl"></div>
-                                <!-- Visual Canvas Mock -->
-                                <div class="relative z-10 w-full flex justify-between items-end px-6 h-48 border-b border-slate-700 pb-2">
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-3 h-3 bg-amber-400 rounded-full mb-1"></div>
-                                        <div class="w-2 h-20 bg-amber-600 rounded-t"></div>
-                                        <span class="text-[10px] text-slate-300 mt-1">Kamu</span>
-                                    </div>
-                                    <div class="flex-1 border-b-2 border-dashed border-cyan-400 mx-4 flex items-center justify-center">
-                                        <span id="telaah-distance-label" class="bg-slate-900 px-2 py-0.5 text-xs text-cyan-400 font-bold rounded">Jarak: 10 m</span>
-                                    </div>
-                                    <div class="flex flex-col items-end">
-                                        <div class="w-2 h-44 bg-slate-300 rounded-t relative">
-                                            <div class="absolute top-0 right-0 w-4 h-3 bg-red-500"></div>
-                                        </div>
-                                        <span class="text-[10px] text-slate-300 mt-1">Tiang (? m)</span>
-                                    </div>
-                                </div>
-                                <div class="w-full z-10 mt-4 text-center">
-                                    <p class="text-xs text-slate-300">Sudut Elevasi Mata: <span id="telaah-angle-val" class="font-bold text-cyan-400">35°</span></p>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-1/2 space-y-4">
-                                <h4 class="font-bold text-slate-900 text-base">Pertanyaan Pemantik:</h4>
-                                <p class="text-sm text-slate-600 italic">"Bagaimana cara mengetahui tinggi tiang bendera tanpa harus memanjatnya secara langsung?"</p>
-                                
-                                <div class="space-y-2 pt-2">
-                                    <label class="block text-xs font-bold text-slate-700">Menurutmu, informasi apa saja yang paling penting untuk dicatat?</label>
-                                    <div class="space-y-2 text-xs">
-                                        <label class="flex items-center space-x-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
-                                            <input type="checkbox" name="telaah-opt" value="jarak" class="rounded text-blue-600">
-                                            <span>Jarak pengamat ke tiang bendera</span>
-                                        </label>
-                                        <label class="flex items-center space-x-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
-                                            <input type="checkbox" name="telaah-opt" value="sudut" class="rounded text-blue-600">
-                                            <span>Besar sudut elevasi pandangan mata ke puncak tiang</span>
-                                        </label>
-                                        <label class="flex items-center space-x-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
-                                            <input type="checkbox" name="telaah-opt" value="tinggi_mata" class="rounded text-blue-600">
-                                            <span>Tinggi mata pengamat dari tanah</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <button onclick="submitTelaah()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition text-sm shadow">Kirim Analisis & Lanjut ke Eksplorasi</button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="space-y-6 max-w-4xl mx-auto">
+              <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6">
+                <div class="flex items-center space-x-3 mb-2">
+                  <span class="bg-emerald-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">T — TELAAH</span>
+                  <h3 class="font-extrabold text-emerald-900 text-lg">Misi 1: Misteri Tiang Bendera</h3>
                 </div>
-            `;
+                <p class="text-sm text-emerald-800 leading-relaxed">Sebelum kita mengenal rumus sinus, cosinus, atau tangen, mari kita amati sebuah masalah di lapangan sekolah.</p>
+              </div>
+              <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col md:flex-row gap-6 items-center">
+                  <div class="w-full md:w-1/2 bg-slate-900 rounded-2xl p-4 flex flex-col items-center justify-center relative min-h-[280px]">
+                    <div class="absolute inset-0 bg-gradient-to-b from-blue-900/30 to-slate-900 rounded-2xl"></div>
+                    <div class="relative z-10 w-full flex justify-between items-end px-6 h-48 border-b border-slate-700 pb-2">
+                      <div class="flex flex-col items-center">
+                        <div class="w-3 h-3 bg-amber-400 rounded-full mb-1"></div>
+                        <div class="w-2 h-20 bg-amber-600 rounded-t"></div>
+                        <span class="text-[10px] text-slate-300 mt-1">Kamu</span>
+                      </div>
+                      <div class="flex-1 border-b-2 border-dashed border-cyan-400 mx-4 flex items-center justify-center">
+                        <span id="telaah-distance-label" class="bg-slate-900 px-2 py-0.5 text-xs text-cyan-400 font-bold rounded">Jarak: 10 m</span>
+                      </div>
+                      <div class="flex flex-col items-end">
+                        <div class="w-2 h-44 bg-slate-300 rounded-t relative">
+                          <div class="absolute top-0 right-0 w-4 h-3 bg-red-500"></div>
+                        </div>
+                        <span class="text-[10px] text-slate-300 mt-1">Tiang (? m)</span>
+                      </div>
+                    </div>
+                    <div class="w-full z-10 mt-4 text-center">
+                      <p class="text-xs text-slate-300">Sudut Elevasi Mata: <span id="telaah-angle-val" class="font-bold text-cyan-400">35°</span></p>
+                    </div>
+                  </div>
+                  <div class="w-full md:w-1/2 space-y-4">
+                    <h4 class="font-bold text-slate-900 text-base">Pertanyaan Pemantik:</h4>
+                    <p class="text-sm text-slate-600 italic">"Bagaimana cara mengetahui tinggi tiang bendera tanpa harus memanjatnya secara langsung?"</p>
+                    <div class="space-y-2 pt-2">
+                      <label class="block text-xs font-bold text-slate-700">Menurutmu, informasi apa saja yang paling penting untuk dicatat?</label>
+                      <div class="space-y-2 text-xs">
+                        <label class="flex items-center space-x-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
+                          <input type="checkbox" name="telaah-opt" value="jarak" class="rounded text-blue-600">
+                          <span>Jarak pengamat ke tiang bendera</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
+                          <input type="checkbox" name="telaah-opt" value="sudut" class="rounded text-blue-600">
+                          <span>Besar sudut elevasi pandangan mata ke puncak tiang</span>
+                        </label>
+                        <label class="flex items-center space-x-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
+                          <input type="checkbox" name="telaah-opt" value="tinggi_mata" class="rounded text-blue-600">
+                          <span>Tinggi mata pengamat dari tanah</span>
+                        </label>
+                      </div>
+                    </div>
+                    <button onclick="submitTelaah()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition text-sm shadow">Kirim Analisis & Lanjut ke Eksplorasi</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
         }
-        function initTelaahScript() {
-            // Interactive adjustments if needed
-        }
+
+        function initTelaahScript() {}
+
         function submitTelaah() {
-            addXP(20, 'telaah');
+            if (!state.completedModules.includes('telaah')) {
+                addXP(20, 'telaah');
+            }
             router.navigate('eksplorasi');
         }
 
-        // EKSPLORASI VIEW (Misi 2) - LAB SEGITIGA INTERAKTIF
+        // ============================================================
+        //  EKSPLORASI (Misi 2) – same as original
+        // ============================================================
         function getEksplorasiHTML() {
             return `
-                <div class="space-y-6 max-w-5xl mx-auto">
-                    <div class="bg-cyan-50 border border-cyan-200 rounded-2xl p-6 flex items-center justify-between">
-                        <div>
-                            <span class="bg-cyan-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">E — EKSPLORASI</span>
-                            <h3 class="font-extrabold text-cyan-900 text-lg mt-1">Laboratorium Segitiga & Perbandingan</h3>
-                            <p class="text-sm text-cyan-800">Geser sudut atau panjang sisi, lalu amati bagaimana rasio perbandingannya tetap konsisten!</p>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button onclick="setCalcMode('sin')" id="btn-mode-sin" class="px-3 py-1.5 rounded-xl font-bold text-xs transition bg-cyan-600 text-white shadow">SIN (Depan/Miring)</button>
-                            <button onclick="setCalcMode('cos')" id="btn-mode-cos" class="px-3 py-1.5 rounded-xl font-bold text-xs transition bg-white text-slate-700 border border-slate-200">COS (Samping/Miring)</button>
-                            <button onclick="setCalcMode('tan')" id="btn-mode-tan" class="px-3 py-1.5 rounded-xl font-bold text-xs transition bg-white text-slate-700 border border-slate-200">TAN (Depan/Samping)</button>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- Canvas / Graphic Area -->
-                        <div class="lg:col-span-2 bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col items-center justify-center relative min-h-[360px]">
-                            <svg id="trig-canvas" class="w-full h-72 max-w-md" viewBox="0 0 300 220">
-                                <!-- Grid background -->
-                                <defs>
-                                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f1f5f9" stroke-width="1"/>
-                                    </pattern>
-                                </defs>
-                                <rect width="300" height="220" fill="url(#grid)" rx="12"/>
-                                
-                                <!-- Triangle Siku-siku -->
-                                <!-- A (Bottom-Left: 50, 180), B (Bottom-Right: 230, 180), C (Top-Right: 230, 50) -->
-                                <polygon id="tri-polygon" points="50,180 230,180 230,50" fill="rgba(59, 130, 246, 0.1)" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
-                                
-                                <!-- Right angle symbol -->
-                                <path d="M 215 180 L 215 165 L 230 165" fill="none" stroke="#64748b" stroke-width="1.5"/>
-
-                                <!-- Labels -->
-                                <text x="140" y="195" fill="#1e293b" font-size="12" font-weight="bold" text-anchor="middle" id="label-samping">Samping (8.0)</text>
-                                <text x="245" y="115" fill="#1e293b" font-size="12" font-weight="bold" id="label-depan">Depan (6.0)</text>
-                                <text x="130" y="105" fill="#1e293b" font-size="12" font-weight="bold" transform="rotate(-35, 135, 110)" id="label-miring">Miring (10.0)</text>
-                                <text x="65" y="170" fill="#2563eb" font-size="14" font-weight="bold" id="label-theta">θ (35°)</text>
-                            </svg>
-
-                            <div class="w-full mt-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-around text-center">
-                                <div>
-                                    <p class="text-[10px] text-slate-400 font-bold uppercase">Sudut θ</p>
-                                    <p class="text-base font-extrabold text-blue-600" id="val-theta">35°</p>
-                                </div>
-                                <div class="h-8 w-px bg-slate-200"></div>
-                                <div>
-                                    <p class="text-[10px] text-slate-400 font-bold uppercase" id="ratio-name">Sin θ (Depan / Miring)</p>
-                                    <p class="text-base font-extrabold text-cyan-600" id="val-ratio">0.5735</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Control Panel & Slider -->
-                        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between space-y-6">
-                            <div class="space-y-4">
-                                <h4 class="font-bold text-slate-900 text-sm">Manipulasi Sudut θ</h4>
-                                <p class="text-xs text-slate-500">Geser slider di bawah untuk mengubah sudut segitiga dan amati perubahan rasionya secara langsung.</p>
-                                
-                                <div class="space-y-2">
-                                    <div class="flex justify-between text-xs font-bold text-slate-700">
-                                        <span>Besar Sudut</span>
-                                        <span id="slider-val-display" class="text-blue-600">35°</span>
-                                    </div>
-                                    <input type="range" id="angle-slider" min="15" max="75" value="35" class="w-full accent-blue-600 cursor-pointer" oninput="updateExploration(this.value)">
-                                </div>
-
-                                <div class="bg-blue-50/50 p-4 rounded-2xl border border-blue-100 space-y-2">
-                                    <p class="text-xs font-bold text-blue-900"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Catatan Eksplorasi:</p>
-                                    <p class="text-[11px] text-slate-600 leading-relaxed" id="exploration-note">Meskipun ukuran segitiga diperbesar atau diperkecil, perbandingan sisi depan dengan sisi miring untuk sudut 35° akan selalu bernilai konstan sekitar 0.573!</p>
-                                </div>
-                            </div>
-
-                            <button onclick="router.navigate('rumuskan')" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl transition text-sm shadow">Lanjut ke Misi Rumuskan</button>
-                        </div>
-                    </div>
+            <div class="space-y-6 max-w-5xl mx-auto">
+              <div class="bg-cyan-50 border border-cyan-200 rounded-2xl p-6 flex items-center justify-between flex-wrap gap-2">
+                <div>
+                  <span class="bg-cyan-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">E — EKSPLORASI</span>
+                  <h3 class="font-extrabold text-cyan-900 text-lg mt-1">Laboratorium Segitiga & Perbandingan</h3>
+                  <p class="text-sm text-cyan-800">Geser sudut atau panjang sisi, lalu amati bagaimana rasio perbandingannya tetap konsisten!</p>
                 </div>
-            `;
+                <div class="flex space-x-2 flex-wrap gap-1">
+                  <button onclick="setCalcMode('sin')" id="btn-mode-sin" class="px-3 py-1.5 rounded-xl font-bold text-xs transition bg-cyan-600 text-white shadow">SIN (Depan/Miring)</button>
+                  <button onclick="setCalcMode('cos')" id="btn-mode-cos" class="px-3 py-1.5 rounded-xl font-bold text-xs transition bg-white text-slate-700 border border-slate-200">COS (Samping/Miring)</button>
+                  <button onclick="setCalcMode('tan')" id="btn-mode-tan" class="px-3 py-1.5 rounded-xl font-bold text-xs transition bg-white text-slate-700 border border-slate-200">TAN (Depan/Samping)</button>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col items-center justify-center relative min-h-[360px]">
+                  <svg id="trig-canvas" class="w-full h-72 max-w-md" viewBox="0 0 300 220">
+                    <defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f1f5f9" stroke-width="1"/></pattern></defs>
+                    <rect width="300" height="220" fill="url(#grid)" rx="12"/>
+                    <polygon id="tri-polygon" points="50,180 230,180 230,50" fill="rgba(59, 130, 246, 0.1)" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+                    <path d="M 215 180 L 215 165 L 230 165" fill="none" stroke="#64748b" stroke-width="1.5"/>
+                    <text x="140" y="195" fill="#1e293b" font-size="12" font-weight="bold" text-anchor="middle" id="label-samping">Samping (8.0)</text>
+                    <text x="245" y="115" fill="#1e293b" font-size="12" font-weight="bold" id="label-depan">Depan (6.0)</text>
+                    <text x="130" y="105" fill="#1e293b" font-size="12" font-weight="bold" transform="rotate(-35, 135, 110)" id="label-miring">Miring (10.0)</text>
+                    <text x="65" y="170" fill="#2563eb" font-size="14" font-weight="bold" id="label-theta">θ (35°)</text>
+                  </svg>
+                  <div class="w-full mt-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-around text-center">
+                    <div><p class="text-[10px] text-slate-400 font-bold uppercase">Sudut θ</p><p class="text-base font-extrabold text-blue-600" id="val-theta">35°</p></div>
+                    <div class="h-8 w-px bg-slate-200"></div>
+                    <div><p class="text-[10px] text-slate-400 font-bold uppercase" id="ratio-name">Sin θ (Depan / Miring)</p><p class="text-base font-extrabold text-cyan-600" id="val-ratio">0.5735</p></div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between space-y-6">
+                  <div class="space-y-4">
+                    <h4 class="font-bold text-slate-900 text-sm">Manipulasi Sudut θ</h4>
+                    <p class="text-xs text-slate-500">Geser slider di bawah untuk mengubah sudut segitiga dan amati perubahan rasionya secara langsung.</p>
+                    <div class="space-y-2">
+                      <div class="flex justify-between text-xs font-bold text-slate-700"><span>Besar Sudut</span><span id="slider-val-display" class="text-blue-600">35°</span></div>
+                      <input type="range" id="angle-slider" min="15" max="75" value="35" class="w-full accent-blue-600 cursor-pointer" oninput="updateExploration(this.value)">
+                    </div>
+                    <div class="bg-blue-50/50 p-4 rounded-2xl border border-blue-100 space-y-2">
+                      <p class="text-xs font-bold text-blue-900"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Catatan Eksplorasi:</p>
+                      <p class="text-[11px] text-slate-600 leading-relaxed" id="exploration-note">Meskipun ukuran segitiga diperbesar atau diperkecil, perbandingan sisi depan dengan sisi miring untuk sudut 35° akan selalu bernilai konstan sekitar 0.573!</p>
+                    </div>
+                  </div>
+                  <button onclick="router.navigate('rumuskan')" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl transition text-sm shadow">Lanjut ke Misi Rumuskan</button>
+                </div>
+              </div>
+            </div>
+          `;
         }
-        function initEksplorasiCanvas() {
-            updateExploration(35);
-        }
+
         let currentMode = 'sin';
+
+        function initEksplorasiCanvas() { updateExploration(35); }
+
         function setCalcMode(mode) {
             currentMode = mode;
             ['sin', 'cos', 'tan'].forEach(m => {
                 const btn = document.getElementById(`btn-mode-${m}`);
-                if(m === mode) {
-                    btn.className = 'px-3 py-1.5 rounded-xl font-bold text-xs transition bg-cyan-600 text-white shadow';
-                } else {
-                    btn.className = 'px-3 py-1.5 rounded-xl font-bold text-xs transition bg-white text-slate-700 border border-slate-200';
-                }
+                if (m === mode) { btn.className =
+                        'px-3 py-1.5 rounded-xl font-bold text-xs transition bg-cyan-600 text-white shadow'; } else { btn
+                        .className = 'px-3 py-1.5 rounded-xl font-bold text-xs transition bg-white text-slate-700 border border-slate-200'; }
             });
             updateExploration(document.getElementById('angle-slider').value);
         }
+
         function updateExploration(angleDeg) {
             const angleRad = angleDeg * (Math.PI / 180);
             document.getElementById('val-theta').innerText = `${angleDeg}°`;
             document.getElementById('slider-val-display').innerText = `${angleDeg}°`;
             document.getElementById('label-theta').innerHTML = `θ (${angleDeg}°)`;
-
-            // Calculate mock triangle dimensions based on angle
-            const baseLen = 140; // adjacent side
+            const baseLen = 140;
             const oppLen = Math.round(baseLen * Math.tan(angleRad) * 10) / 10;
-            const hypLen = Math.round(Math.sqrt(baseLen*baseLen + oppLen*oppLen) * 10) / 10;
-
-            // Update SVG polygon points (height changes based on oppLen)
+            const hypLen = Math.round(Math.sqrt(baseLen * baseLen + oppLen * oppLen) * 10) / 10;
             const height = Math.min(130, Math.max(30, oppLen * 1.2));
             const yTop = 180 - height;
             const poly = document.getElementById('tri-polygon');
-            if(poly) {
-                poly.setAttribute('points', `50,180 230,180 230,${yTop}`);
-            }
-
-            // Update ratio display
-            let ratioVal = 0;
-            let ratioTitle = '';
-            if(currentMode === 'sin') {
-                ratioVal = Math.sin(angleRad).toFixed(4);
+            if (poly) poly.setAttribute('points', `50,180 230,180 230,${yTop}`);
+            let ratioVal = 0,
+                ratioTitle = '';
+            if (currentMode === 'sin') {
+                ratioVal = Math.sin(angleRad);
                 ratioTitle = 'Sin θ (Depan / Miring)';
-                document.getElementById('exploration-note').innerText = `Sinus sudut ${angleDeg}° adalah perbandingan sisi di depan sudut (tinggi) dengan sisi miring segitiga. Nilainya konsisten di ${ratioVal}.`;
-            } else if(currentMode === 'cos') {
-                ratioVal = Math.cos(angleRad).toFixed(4);
+                document.getElementById('exploration-note').innerText =
+                    `Sinus sudut ${angleDeg}° adalah perbandingan sisi di depan sudut (tinggi) dengan sisi miring segitiga. Nilainya konsisten di ${ratioVal.toFixed(4)}.`;
+            } else if (currentMode === 'cos') {
+                ratioVal = Math.cos(angleRad);
                 ratioTitle = 'Cos θ (Samping / Miring)';
-                document.getElementById('exploration-note').innerText = `Cosinus sudut ${angleDeg}° adalah perbandingan sisi di samping sudut dengan sisi miring segitiga. Nilainya konsisten di ${ratioVal}.`;
+                document.getElementById('exploration-note').innerText =
+                    `Cosinus sudut ${angleDeg}° adalah perbandingan sisi di samping sudut dengan sisi miring segitiga. Nilainya konsisten di ${ratioVal.toFixed(4)}.`;
             } else {
-                ratioVal = Math.tan(angleRad).toFixed(4);
+                ratioVal = Math.tan(angleRad);
                 ratioTitle = 'Tan θ (Depan / Samping)';
-                document.getElementById('exploration-note').innerText = `Tangen sudut ${angleDeg}° adalah perbandingan sisi di depan sudut dengan sisi di samping sudut. Nilainya konsisten di ${ratioVal}.`;
+                document.getElementById('exploration-note').innerText =
+                    `Tangen sudut ${angleDeg}° adalah perbandingan sisi di depan sudut dengan sisi di samping sudut. Nilainya konsisten di ${ratioVal.toFixed(4)}.`;
             }
             document.getElementById('ratio-name').innerText = ratioTitle;
-            document.getElementById('val-ratio').innerText = ratioVal;
+            document.getElementById('val-ratio').innerText = ratioVal.toFixed(4);
         }
 
-        // RUMUSKAN VIEW (Misi 3)
+        // ============================================================
+        //  RUMUSKAN (Misi 3) – same
+        // ============================================================
         function getRumuskanHTML() {
             return `
-                <div class="space-y-6 max-w-4xl mx-auto">
-                    <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-6">
-                        <div class="flex items-center space-x-3 mb-2">
-                            <span class="bg-indigo-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">R — RUMUSKAN</span>
-                            <h3 class="font-extrabold text-indigo-900 text-lg">Misi 3: Menyusun Rumus Trigonometri</h3>
-                        </div>
-                        <p class="text-sm text-indigo-800 leading-relaxed">Berdasarkan hasil eksplorasi rasio perbandingan sisi segitiga siku-siku, mari kita simpulkan dan tuliskan rumusnya secara tepat.</p>
-                    </div>
-
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
-                                <h4 class="font-bold text-slate-800 text-sm flex items-center"><span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 inline-flex items-center justify-center mr-2 text-xs">1</span> Sinus (sin θ)</h4>
-                                <div class="space-y-2 text-xs">
-                                    <label class="block text-slate-500 font-medium">Pembilang:</label>
-                                    <select id="rumus-sin-top" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
-                                        <option value="">-- Pilih Sisi --</option>
-                                        <option value="depan">Sisi Depan</option>
-                                        <option value="samping">Sisi Samping</option>
-                                        <option value="miring">Sisi Miring</option>
-                                    </select>
-                                    <label class="block text-slate-500 font-medium">Penyebut:</label>
-                                    <select id="rumus-sin-bot" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
-                                        <option value="">-- Pilih Sisi --</option>
-                                        <option value="depan">Sisi Depan</option>
-                                        <option value="samping">Sisi Samping</option>
-                                        <option value="miring">Sisi Miring</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
-                                <h4 class="font-bold text-slate-800 text-sm flex items-center"><span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 inline-flex items-center justify-center mr-2 text-xs">2</span> Cosinus (cos θ)</h4>
-                                <div class="space-y-2 text-xs">
-                                    <label class="block text-slate-500 font-medium">Pembilang:</label>
-                                    <select id="rumus-cos-top" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
-                                        <option value="">-- Pilih Sisi --</option>
-                                        <option value="depan">Sisi Depan</option>
-                                        <option value="samping">Sisi Samping</option>
-                                        <option value="miring">Sisi Miring</option>
-                                    </select>
-                                    <label class="block text-slate-500 font-medium">Penyebut:</label>
-                                    <select id="rumus-cos-bot" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
-                                        <option value="">-- Pilih Sisi --</option>
-                                        <option value="depan">Sisi Depan</option>
-                                        <option value="samping">Sisi Samping</option>
-                                        <option value="miring">Sisi Miring</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
-                                <h4 class="font-bold text-slate-800 text-sm flex items-center"><span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 inline-flex items-center justify-center mr-2 text-xs">3</span> Tangen (tan θ)</h4>
-                                <div class="space-y-2 text-xs">
-                                    <label class="block text-slate-500 font-medium">Pembilang:</label>
-                                    <select id="rumus-tan-top" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
-                                        <option value="">-- Pilih Sisi --</option>
-                                        <option value="depan">Sisi Depan</option>
-                                        <option value="samping">Sisi Samping</option>
-                                        <option value="miring">Sisi Miring</option>
-                                    </select>
-                                    <label class="block text-slate-500 font-medium">Penyebut:</label>
-                                    <select id="rumus-tan-bot" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
-                                        <option value="">-- Pilih Sisi --</option>
-                                        <option value="depan">Sisi Depan</option>
-                                        <option value="samping">Sisi Samping</option>
-                                        <option value="miring">Sisi Miring</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="rumus-feedback" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
-
-                        <div class="flex justify-between items-center pt-2">
-                            <button onclick="checkRumus()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow">Verifikasi Rumus</button>
-                            <button onclick="router.navigate('presentasikan')" class="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center space-x-1"><span>Lanjut ke Presentasikan</span> <i class="fa-solid fa-arrow-right ml-1"></i></button>
-                        </div>
-                    </div>
+            <div class="space-y-6 max-w-4xl mx-auto">
+              <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-6">
+                <div class="flex items-center space-x-3 mb-2">
+                  <span class="bg-indigo-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">R — RUMUSKAN</span>
+                  <h3 class="font-extrabold text-indigo-900 text-lg">Misi 3: Menyusun Rumus Trigonometri</h3>
                 </div>
-            `;
+                <p class="text-sm text-indigo-800 leading-relaxed">Berdasarkan hasil eksplorasi rasio perbandingan sisi segitiga siku-siku, mari kita simpulkan dan tuliskan rumusnya secara tepat.</p>
+              </div>
+              <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-800 text-sm flex items-center"><span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 inline-flex items-center justify-center mr-2 text-xs">1</span> Sinus (sin θ)</h4>
+                    <div class="space-y-2 text-xs">
+                      <label class="block text-slate-500 font-medium">Pembilang:</label>
+                      <select id="rumus-sin-top" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
+                        <option value="">-- Pilih Sisi --</option>
+                        <option value="depan">Sisi Depan</option>
+                        <option value="samping">Sisi Samping</option>
+                        <option value="miring">Sisi Miring</option>
+                      </select>
+                      <label class="block text-slate-500 font-medium">Penyebut:</label>
+                      <select id="rumus-sin-bot" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
+                        <option value="">-- Pilih Sisi --</option>
+                        <option value="depan">Sisi Depan</option>
+                        <option value="samping">Sisi Samping</option>
+                        <option value="miring">Sisi Miring</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-800 text-sm flex items-center"><span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 inline-flex items-center justify-center mr-2 text-xs">2</span> Cosinus (cos θ)</h4>
+                    <div class="space-y-2 text-xs">
+                      <label class="block text-slate-500 font-medium">Pembilang:</label>
+                      <select id="rumus-cos-top" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
+                        <option value="">-- Pilih Sisi --</option>
+                        <option value="depan">Sisi Depan</option>
+                        <option value="samping">Sisi Samping</option>
+                        <option value="miring">Sisi Miring</option>
+                      </select>
+                      <label class="block text-slate-500 font-medium">Penyebut:</label>
+                      <select id="rumus-cos-bot" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
+                        <option value="">-- Pilih Sisi --</option>
+                        <option value="depan">Sisi Depan</option>
+                        <option value="samping">Sisi Samping</option>
+                        <option value="miring">Sisi Miring</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-800 text-sm flex items-center"><span class="w-6 h-6 rounded-lg bg-blue-100 text-blue-600 inline-flex items-center justify-center mr-2 text-xs">3</span> Tangen (tan θ)</h4>
+                    <div class="space-y-2 text-xs">
+                      <label class="block text-slate-500 font-medium">Pembilang:</label>
+                      <select id="rumus-tan-top" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
+                        <option value="">-- Pilih Sisi --</option>
+                        <option value="depan">Sisi Depan</option>
+                        <option value="samping">Sisi Samping</option>
+                        <option value="miring">Sisi Miring</option>
+                      </select>
+                      <label class="block text-slate-500 font-medium">Penyebut:</label>
+                      <select id="rumus-tan-bot" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-slate-800 font-semibold">
+                        <option value="">-- Pilih Sisi --</option>
+                        <option value="depan">Sisi Depan</option>
+                        <option value="samping">Sisi Samping</option>
+                        <option value="miring">Sisi Miring</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="rumus-feedback" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
+                <div class="flex justify-between items-center pt-2">
+                  <button onclick="checkRumus()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow">Verifikasi Rumus</button>
+                  <button onclick="router.navigate('presentasikan')" class="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center space-x-1"><span>Lanjut ke Presentasikan</span> <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                </div>
+              </div>
+            </div>
+          `;
         }
+
         function initRumuskanScript() {}
+
         function checkRumus() {
             const sinTop = document.getElementById('rumus-sin-top').value;
             const sinBot = document.getElementById('rumus-sin-bot').value;
@@ -736,487 +1036,532 @@
             const cosBot = document.getElementById('rumus-cos-bot').value;
             const tanTop = document.getElementById('rumus-tan-top').value;
             const tanBot = document.getElementById('rumus-tan-bot').value;
-
             const fb = document.getElementById('rumus-feedback');
             fb.classList.remove('hidden');
-
-            if(sinTop === 'depan' && sinBot === 'miring' && cosTop === 'samping' && cosBot === 'miring' && tanTop === 'depan' && tanBot === 'samping') {
+            if (sinTop === 'depan' && sinBot === 'miring' && cosTop === 'samping' && cosBot === 'miring' && tanTop ===
+                'depan' && tanBot === 'samping') {
                 fb.className = 'p-4 rounded-2xl text-xs font-semibold bg-emerald-50 border border-emerald-200 text-emerald-800';
-                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1 text-sm"></i> Luar biasa! Rumusmu tepat sekali: <strong>sin = depan/miring, cos = samping/miring, tan = depan/samping</strong>. Ingat Mnemonic populer: <strong>SOH - CAH - TOA</strong>.`;
-                addXP(30, 'rumuskan');
+                fb.innerHTML =
+                    `<i class="fa-solid fa-circle-check text-emerald-600 mr-1 text-sm"></i> Luar biasa! Rumusmu tepat sekali: <strong>sin = depan/miring, cos = samping/miring, tan = depan/samping</strong>. Ingat Mnemonic populer: <strong>SOH - CAH - TOA</strong>.`;
+                if (!state.completedModules.includes('rumuskan')) addXP(30, 'rumuskan');
             } else {
                 fb.className = 'p-4 rounded-2xl text-xs font-semibold bg-amber-50 border border-amber-200 text-amber-800';
-                fb.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1 text-sm"></i> Belum tepat sepenuhnya. Ingat kembali: Sinus membandingkan sisi depan dengan miring, Cosinus samping dengan miring, dan Tangen depan dengan samping. Coba periksa kembali!`;
+                fb.innerHTML =
+                    `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1 text-sm"></i> Belum tepat sepenuhnya. Ingat kembali: Sinus membandingkan sisi depan dengan miring, Cosinus samping dengan miring, dan Tangen depan dengan samping. Coba periksa kembali!`;
             }
         }
 
-        // PRESENTASIKAN VIEW (Misi 4)
+        // ============================================================
+        //  PRESENTASIKAN (Misi 4) – same
+        // ============================================================
         function getPresentasikanHTML() {
             return `
-                <div class="space-y-6 max-w-4xl mx-auto">
-                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6">
-                        <div class="flex items-center space-x-3 mb-2">
-                            <span class="bg-amber-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">P — PRESENTASIKAN</span>
-                            <h3 class="font-extrabold text-amber-900 text-lg">Misi 4: Jelaskan Langkah Penyelesaianmu</h3>
-                        </div>
-                        <p class="text-sm text-amber-800 leading-relaxed">Susun langkah-langkah logis berikut dengan cara menyeret atau mengurutkan urutan yang benar untuk menyelesaikan soal segitiga siku-siku.</p>
-                    </div>
-
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-between">
-                            <div>
-                                <p class="text-xs font-bold text-slate-700">Soal Latihan:</p>
-                                <p class="text-sm text-slate-900 font-semibold mt-1">Diberikan segitiga dengan sisi depan = 6 cm dan sisi samping = 8 cm. Berapa nilai Sin θ jika miring = 10 cm?</p>
-                            </div>
-                            <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-inner text-center">
-                                <span class="text-xs text-slate-400 block">Sisi Depan</span>
-                                <span class="font-bold text-blue-600">6</span>
-                            </div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Susun Urutan Langkah Berpikir (1 sampai 4):</label>
-                            
-                            <div class="space-y-2">
-                                <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
-                                    <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">1</span>
-                                    <select id="step-1" class="flex-1 bg-white border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">
-                                        <option value="">-- Pilih Langkah Pertama --</option>
-                                        <option value="identifikasi">Identifikasi posisi sudut θ dan nilai sisi yang diketahui (depan=6, samping=8, miring=10).</option>
-                                        <option value="hitung">Langsung hitung hasil akhir kalkulator.</option>
-                                        <option value="tebak">Tebak angka acak.</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
-                                    <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">2</span>
-                                    <select id="step-2" class="flex-1 bg-white border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">
-                                        <option value="">-- Pilih Langkah Kedua --</option>
-                                        <option value="rumus">Pilih perbandingan trigonometri yang sesuai, yaitu sin θ = sisi depan / sisi miring.</option>
-                                        <option value="keliling">Hitung keliling segitiga.</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
-                                    <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">3</span>
-                                    <select id="step-3" class="flex-1 bg-white border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">
-                                        <option value="">-- Pilih Langkah Ketiga --</option>
-                                        <option value="substitusi">Substitusikan nilai yang diketahui ke dalam rumus: sin θ = 6 / 10.</option>
-                                        <option value="luas">Hitung luas segitiga.</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
-                                    <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">4</span>
-                                    <select id="step-4" class="flex-1 bg-white border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">
-                                        <option value="">-- Pilih Langkah Keempat --</option>
-                                        <option value="hasil">Sederhanakan hasil menjadi 0,6 atau 3/5 dan periksa kembali kewajaran jawabannya.</option>
-                                        <option value="selesai">Selesai tanpa periksa.</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="presentasi-feedback" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
-
-                        <div class="flex justify-between items-center pt-2">
-                            <button onclick="checkPresentasi()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow">Periksa Langkah</button>
-                            <button onclick="router.navigate('aplikasikan')" class="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center space-x-1"><span>Lanjut ke Aplikasikan</span> <i class="fa-solid fa-arrow-right ml-1"></i></button>
-                        </div>
-                    </div>
+            <div class="space-y-6 max-w-4xl mx-auto">
+              <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6">
+                <div class="flex items-center space-x-3 mb-2">
+                  <span class="bg-amber-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">P — PRESENTASIKAN</span>
+                  <h3 class="font-extrabold text-amber-900 text-lg">Misi 4: Jelaskan Langkah Penyelesaianmu</h3>
                 </div>
-            `;
+                <p class="text-sm text-amber-800 leading-relaxed">Susun langkah-langkah logis berikut dengan cara menyeret atau mengurutkan urutan yang benar untuk menyelesaikan soal segitiga siku-siku.</p>
+              </div>
+              <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-between">
+                  <div><p class="text-xs font-bold text-slate-700">Soal Latihan:</p><p class="text-sm text-slate-900 font-semibold mt-1">Diberikan segitiga dengan sisi depan = 6 cm dan sisi samping = 8 cm. Berapa nilai Sin θ jika miring = 10 cm?</p></div>
+                  <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-inner text-center"><span class="text-xs text-slate-400 block">Sisi Depan</span><span class="font-bold text-blue-600">6</span></div>
+                </div>
+                <div class="space-y-3">
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Susun Urutan Langkah Berpikir (1 sampai 4):</label>
+                  <div class="space-y-2">
+                    <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">1</span>
+                      <select id="step-1" class="flex-1 bg-white border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">
+                        <option value="">-- Pilih Langkah Pertama --</option>
+                        <option value="identifikasi">Identifikasi posisi sudut θ dan nilai sisi yang diketahui (depan=6, samping=8, miring=10).</option>
+                        <option value="hitung">Langsung hitung hasil akhir kalkulator.</option>
+                        <option value="tebak">Tebak angka acak.</option>
+                      </select>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">2</span>
+                      <select id="step-2" class="flex-1 bg-white border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">
+                        <option value="">-- Pilih Langkah Kedua --</option>
+                        <option value="rumus">Pilih perbandingan trigonometri yang sesuai, yaitu sin θ = sisi depan / sisi miring.</option>
+                        <option value="keliling">Hitung keliling segitiga.</option>
+                      </select>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">3</span>
+                      <select id="step-3" class="flex-1 bg-white border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">
+                        <option value="">-- Pilih Langkah Ketiga --</option>
+                        <option value="substitusi">Substitusikan nilai yang diketahui ke dalam rumus: sin θ = 6 / 10.</option>
+                        <option value="luas">Hitung luas segitiga.</option>
+                      </select>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">4</span>
+                      <select id="step-4" class="flex-1 bg-white border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">
+                        <option value="">-- Pilih Langkah Keempat --</option>
+                        <option value="hasil">Sederhanakan hasil menjadi 0,6 atau 3/5 dan periksa kembali kewajaran jawabannya.</option>
+                        <option value="selesai">Selesai tanpa periksa.</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="presentasi-feedback" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
+                <div class="flex justify-between items-center pt-2">
+                  <button onclick="checkPresentasi()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow">Periksa Langkah</button>
+                  <button onclick="router.navigate('aplikasikan')" class="text-blue-600 hover:text-blue-700 font-bold text-sm flex items-center space-x-1"><span>Lanjut ke Aplikasikan</span> <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                </div>
+              </div>
+            </div>
+          `;
         }
+
         function initPresentasikanScript() {}
+
         function checkPresentasi() {
             const s1 = document.getElementById('step-1').value;
             const s2 = document.getElementById('step-2').value;
             const s3 = document.getElementById('step-3').value;
             const s4 = document.getElementById('step-4').value;
-
             const fb = document.getElementById('presentasi-feedback');
             fb.classList.remove('hidden');
-
-            if(s1 === 'identifikasi' && s2 === 'rumus' && s3 === 'substitusi' && s4 === 'hasil') {
+            if (s1 === 'identifikasi' && s2 === 'rumus' && s3 === 'substitusi' && s4 === 'hasil') {
                 fb.className = 'p-4 rounded-2xl text-xs font-semibold bg-emerald-50 border border-emerald-200 text-emerald-800';
-                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1 text-sm"><b>Sempurna!</b> Urutan penjelasanmu sangat sistematis dan berorientasi pada proses berpikir ilmiah.`;
-                addXP(25, 'presentasikan');
+                fb.innerHTML =
+                    `<i class="fa-solid fa-circle-check text-emerald-600 mr-1 text-sm"></i> <b>Sempurna!</b> Urutan penjelasanmu sangat sistematis dan berorientasi pada proses berpikir ilmiah.`;
+                if (!state.completedModules.includes('presentasikan')) addXP(25, 'presentasikan');
             } else {
                 fb.className = 'p-4 rounded-2xl text-xs font-semibold bg-amber-50 border border-amber-200 text-amber-800';
-                fb.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1 text-sm"></i> Urutan belum tepat. Mulailah dengan mengidentifikasi komponen, memilih rumus, memasukkan nilai, lalu menyederhanakannya.`;
+                fb.innerHTML =
+                    `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1 text-sm"></i> Urutan belum tepat. Mulailah dengan mengidentifikasi komponen, memilih rumus, memasukkan nilai, lalu menyederhanakannya.`;
             }
         }
 
-        // APLIKASIKAN VIEW (Misi 5) - SIMULASI 5 BENDA NYATA
+        // ============================================================
+        //  APLIKASIKAN (Misi 5) – same
+        // ============================================================
+        let currentSim = 'tiang';
+
         function getAplikasiHTML() {
             return `
-                <div class="space-y-6 max-w-5xl mx-auto">
-                    <div class="bg-violet-50 border border-violet-200 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between">
-                        <div>
-                            <span class="bg-violet-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">A — APLIKASIKAN</span>
-                            <h3 class="font-extrabold text-violet-900 text-lg mt-1">Misi 5: Simulasi Pengukuran Dunia Nyata</h3>
-                            <p class="text-sm text-violet-800">Terapkan konsep trigonometri untuk menyelesaikan 5 simulasi benda nyata surveyor.</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-4 md:mt-0">
-                            <button onclick="setSimType('tiang')" id="sim-btn-tiang" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-violet-600 text-white shadow">1. Tiang</button>
-                            <button onclick="setSimType('pohon')" id="sim-btn-pohon" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200">2. Pohon</button>
-                            <button onclick="setSimType('gedung')" id="sim-btn-gedung" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200">3. Gedung</button>
-                            <button onclick="setSimType('tangga')" id="sim-btn-tangga" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200">4. Tangga</button>
-                            <button onclick="setSimType('atap')" id="sim-btn-atap" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200">5. Atap</button>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Simulation Graphic & Scenario -->
-                        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
-                            <div>
-                                <div class="flex items-center justify-between mb-2">
-                                    <h4 id="sim-title" class="font-extrabold text-slate-900 text-base">Simulasi Tinggi Tiang Bendera</h4>
-                                    <span class="text-xs bg-violet-100 text-violet-700 px-2.5 py-1 rounded-full font-bold" id="sim-badge">Tingkat Menengah</span>
-                                </div>
-                                <p id="sim-desc" class="text-xs text-slate-600 leading-relaxed">Seorang siswa berdiri sejauh 15 meter dari tiang bendera. Jika sudut elevasi dari mata pengamat ke puncak tiang adalah 40° dan tinggi mata 1,6 meter, berapakah tinggi total tiang bendera?</p>
-                            </div>
-
-                            <div class="bg-slate-900 rounded-2xl p-6 text-white flex flex-col items-center justify-center min-h-[200px] relative">
-                                <div class="absolute inset-0 bg-gradient-to-tr from-blue-900/40 to-slate-900 rounded-2xl"></div>
-                                <div class="relative z-10 text-center space-y-2">
-                                    <i class="fa-solid fa-mountain-sun text-cyan-400 text-3xl"></i>
-                                    <p class="text-sm font-bold" id="sim-visual-caption">Jarak (d) = 15 m | Sudut (θ) = 40°</p>
-                                    <p class="text-xs text-slate-400">Gunakan rumus: Tinggi = (Jarak × tan θ) + Tinggi Mata</p>
-                                </div>
-                            </div>
-
-                            <div class="space-y-2">
-                                <label class="block text-xs font-bold text-slate-700">Masukkan Hasil Perhitunganmu (Meter):</label>
-                                <div class="flex space-x-2">
-                                    <input type="number" step="0.1" id="sim-user-answer" placeholder="Contoh: 14.2" class="flex-1 bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-sm font-bold text-slate-800">
-                                    <button onclick="checkSimulation()" class="bg-violet-600 hover:bg-violet-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition shadow">Cek Jawaban</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step-by-step guidance & Scaffolding -->
-                        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
-                            <div class="space-y-3">
-                                <h4 class="font-bold text-slate-900 text-sm flex items-center"><i class="fa-solid fa-list-check text-violet-600 mr-2"></i> Bimbingan Langkah demi Langkah</h4>
-                                <div class="space-y-2 text-xs text-slate-600">
-                                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                                        <span class="font-bold text-slate-800 block mb-1">Langkah 1: Identifikasi Komponen</span>
-                                        <p id="scaffold-step-1">Diketahui jarak sisi samping = 15 m, sudut θ = 40°, dan tinggi mata = 1,6 m.</p>
-                                    </div>
-                                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                                        <span class="font-bold text-slate-800 block mb-1">Langkah 2: Pilih Perbandingan</span>
-                                        <p id="scaffold-step-2">Karena sisi depan (tinggi tiang di atas mata) dan sisi samping diketahui, gunakan <strong>tan 40°</strong>.</p>
-                                    </div>
-                                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                                        <span class="font-bold text-slate-800 block mb-1">Langkah 3: Hitung & Tambahkan Tinggi Mata</span>
-                                        <p id="scaffold-step-3">tan(40°) ≈ 0.8391. Maka tinggi = (15 × 0.8391) + 1.6 = 12.59 + 1.6 = 14.19 meter.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="sim-feedback" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
-
-                            <div class="flex items-center justify-between pt-2 border-t border-slate-100">
-                                <button onclick="showHint()" class="text-amber-600 hover:text-amber-700 font-bold text-xs flex items-center space-x-1"><i class="fa-solid fa-lightbulb"></i><span>Butuh Petunjuk?</span></button>
-                                <button onclick="router.navigate('duniawi')" class="text-blue-600 hover:text-blue-700 font-bold text-xs flex items-center space-x-1"><span>Lanjut ke Duniawi</span> <i class="fa-solid fa-arrow-right ml-1"></i></button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="space-y-6 max-w-5xl mx-auto">
+              <div class="bg-violet-50 border border-violet-200 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between">
+                <div>
+                  <span class="bg-violet-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">A — APLIKASIKAN</span>
+                  <h3 class="font-extrabold text-violet-900 text-lg mt-1">Misi 5: Simulasi Pengukuran Dunia Nyata</h3>
+                  <p class="text-sm text-violet-800">Terapkan konsep trigonometri untuk menyelesaikan 5 simulasi benda nyata surveyor.</p>
                 </div>
-            `;
+                <div class="flex flex-wrap gap-2 mt-4 md:mt-0">
+                  <button onclick="setSimType('tiang')" id="sim-btn-tiang" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-violet-600 text-white shadow">1. Tiang</button>
+                  <button onclick="setSimType('pohon')" id="sim-btn-pohon" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200">2. Pohon</button>
+                  <button onclick="setSimType('gedung')" id="sim-btn-gedung" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200">3. Gedung</button>
+                  <button onclick="setSimType('tangga')" id="sim-btn-tangga" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200">4. Tangga</button>
+                  <button onclick="setSimType('atap')" id="sim-btn-atap" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200">5. Atap</button>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <h4 id="sim-title" class="font-extrabold text-slate-900 text-base">Simulasi Tinggi Tiang Bendera</h4>
+                      <span class="text-xs bg-violet-100 text-violet-700 px-2.5 py-1 rounded-full font-bold" id="sim-badge">Tingkat Menengah</span>
+                    </div>
+                    <p id="sim-desc" class="text-xs text-slate-600 leading-relaxed">Seorang siswa berdiri sejauh 15 meter dari tiang bendera. Jika sudut elevasi dari mata pengamat ke puncak tiang adalah 40° dan tinggi mata 1,6 meter, berapakah tinggi total tiang bendera?</p>
+                  </div>
+                  <div class="bg-slate-900 rounded-2xl p-6 text-white flex flex-col items-center justify-center min-h-[200px] relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-900/40 to-slate-900 rounded-2xl"></div>
+                    <div class="relative z-10 text-center space-y-2">
+                      <i class="fa-solid fa-mountain-sun text-cyan-400 text-3xl"></i>
+                      <p class="text-sm font-bold" id="sim-visual-caption">Jarak (d) = 15 m | Sudut (θ) = 40°</p>
+                      <p class="text-xs text-slate-400">Gunakan rumus: Tinggi = (Jarak × tan θ) + Tinggi Mata</p>
+                    </div>
+                  </div>
+                  <div class="space-y-2">
+                    <label class="block text-xs font-bold text-slate-700">Masukkan Hasil Perhitunganmu (Meter):</label>
+                    <div class="flex space-x-2">
+                      <input type="number" step="0.1" id="sim-user-answer" placeholder="Contoh: 14.2" class="flex-1 bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-sm font-bold text-slate-800">
+                      <button onclick="checkSimulation()" class="bg-violet-600 hover:bg-violet-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition shadow">Cek Jawaban</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+                  <div class="space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center"><i class="fa-solid fa-list-check text-violet-600 mr-2"></i> Bimbingan Langkah demi Langkah</h4>
+                    <div class="space-y-2 text-xs text-slate-600">
+                      <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="font-bold text-slate-800 block mb-1">Langkah 1: Identifikasi Komponen</span>
+                        <p id="scaffold-step-1">Diketahui jarak sisi samping = 15 m, sudut θ = 40°, dan tinggi mata = 1,6 m.</p>
+                      </div>
+                      <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="font-bold text-slate-800 block mb-1">Langkah 2: Pilih Perbandingan</span>
+                        <p id="scaffold-step-2">Karena sisi depan (tinggi tiang di atas mata) dan sisi samping diketahui, gunakan <strong>tan 40°</strong>.</p>
+                      </div>
+                      <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="font-bold text-slate-800 block mb-1">Langkah 3: Hitung & Tambahkan Tinggi Mata</span>
+                        <p id="scaffold-step-3">tan(40°) ≈ 0.8391. Maka tinggi = (15 × 0.8391) + 1.6 = 12.59 + 1.6 = 14.19 meter.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="sim-feedback" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
+                  <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                    <button onclick="showHint()" class="text-amber-600 hover:text-amber-700 font-bold text-xs flex items-center space-x-1"><i class="fa-solid fa-lightbulb"></i><span>Butuh Petunjuk?</span></button>
+                    <button onclick="router.navigate('duniawi')" class="text-blue-600 hover:text-blue-700 font-bold text-xs flex items-center space-x-1"><span>Lanjut ke Duniawi</span> <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
         }
-        let currentSim = 'tiang';
+
+        function initAplikasiScript() { setSimType('tiang'); }
+
         function setSimType(type) {
             currentSim = type;
             ['tiang', 'pohon', 'gedung', 'tangga', 'atap'].forEach(t => {
                 const btn = document.getElementById(`sim-btn-${t}`);
-                if(t === type) {
-                    btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition bg-violet-600 text-white shadow';
-                } else {
-                    btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200';
-                }
+                if (t === type) { btn.className =
+                        'px-3 py-1.5 rounded-xl text-xs font-bold transition bg-violet-600 text-white shadow'; } else { btn
+                        .className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200'; }
             });
-
             const title = document.getElementById('sim-title');
             const desc = document.getElementById('sim-desc');
             const caption = document.getElementById('sim-visual-caption');
-
-            if(type === 'tiang') {
+            if (type === 'tiang') {
                 title.innerText = "Simulasi Tinggi Tiang Bendera";
-                desc.innerText = "Seorang siswa berdiri sejauh 15 meter dari tiang bendera. Jika sudut elevasi dari mata pengamat ke puncak tiang adalah 40° dan tinggi mata 1,6 meter, berapakah tinggi total tiang bendera?";
+                desc.innerText =
+                    "Seorang siswa berdiri sejauh 15 meter dari tiang bendera. Jika sudut elevasi dari mata pengamat ke puncak tiang adalah 40° dan tinggi mata 1,6 meter, berapakah tinggi total tiang bendera?";
                 caption.innerText = "Jarak (d) = 15 m | Sudut (θ) = 40°";
-            } else if(type === 'pohon') {
+            } else if (type === 'pohon') {
                 title.innerText = "Simulasi Estimasi Tinggi Pohon";
-                desc.innerText = "Tim surveyor mengukur tinggi pohon dari jarak 20 meter. Sudut elevasi puncak pohon tercatat 50° dengan tinggi mata 1,5 meter. Berapa tinggi pohon tersebut?";
+                desc.innerText =
+                    "Tim surveyor mengukur tinggi pohon dari jarak 20 meter. Sudut elevasi puncak pohon tercatat 50° dengan tinggi mata 1,5 meter. Berapa tinggi pohon tersebut?";
                 caption.innerText = "Jarak (d) = 20 m | Sudut (θ) = 50°";
-            } else if(type === 'gedung') {
+            } else if (type === 'gedung') {
                 title.innerText = "Simulasi Tinggi Gedung Bertingkat";
-                desc.innerText = "Dari kejauhan 30 meter, seorang arsitek mengukur sudut puncak gedung sebesar 60° dari permukaan tanah. Jika tinggi pengamat diabaikan (0 m), berapa tinggi gedung?";
+                desc.innerText =
+                    "Dari kejauhan 30 meter, seorang arsitek mengukur sudut puncak gedung sebesar 60° dari permukaan tanah. Jika tinggi pengamat diabaikan (0 m), berapa tinggi gedung?";
                 caption.innerText = "Jarak (d) = 30 m | Sudut (θ) = 60°";
-            } else if(type === 'tangga') {
+            } else if (type === 'tangga') {
                 title.innerText = "Simulasi Kemiringan Tangga";
-                desc.innerText = "Sebuah tangga panjang 5 meter bersandar pada dinding rumah membentuk sudut 65° dengan lantai. Berapa tinggi dinding yang dapat dicapai oleh ujung tangga?";
+                desc.innerText =
+                    "Sebuah tangga panjang 5 meter bersandar pada dinding rumah membentuk sudut 65° dengan lantai. Berapa tinggi dinding yang dapat dicapai oleh ujung tangga?";
                 caption.innerText = "Panjang Miring = 5 m | Sudut (θ) = 65°";
             } else {
                 title.innerText = "Simulasi Panjang Sisi Miring Atap Rumah";
-                desc.innerText = "Lebar alas atap rumah adalah 8 meter dan sudut kemiringan atap dengan horizontal adalah 30°. Berapa panjang sisi miring kerangka atap tersebut?";
+                desc.innerText =
+                    "Lebar alas atap rumah adalah 8 meter dan sudut kemiringan atap dengan horizontal adalah 30°. Berapa panjang sisi miring kerangka atap tersebut?";
                 caption.innerText = "Setengah Alas = 4 m | Sudut (θ) = 30°";
             }
         }
-        function initAplikasiScript() {}
+
         function checkSimulation() {
             const val = parseFloat(document.getElementById('sim-user-answer').value);
             const fb = document.getElementById('sim-feedback');
             fb.classList.remove('hidden');
-
             let target = 14.2;
-            if(currentSim === 'pohon') target = 25.3;
-            else if(currentSim === 'gedung') target = 52.0;
-            else if(currentSim === 'tangga') target = 4.5;
-            else if(currentSim === 'atap') target = 4.6;
-
-            if(!isNaN(val) && Math.abs(val - target) <= 0.3) {
+            if (currentSim === 'pohon') target = 25.3;
+            else if (currentSim === 'gedung') target = 52.0;
+            else if (currentSim === 'tangga') target = 4.5;
+            else if (currentSim === 'atap') target = 4.6;
+            if (!isNaN(val) && Math.abs(val - target) <= 0.3) {
                 fb.className = 'p-4 rounded-2xl text-xs font-semibold bg-emerald-50 border border-emerald-200 text-emerald-800';
-                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1 text-sm"></i> <b>Tepat sekali!</b> Perhitunganmu akurat (${val} m). Kamu telah menguasai aplikasi nyata trigonometri surveyor.`;
-                addXP(35, 'aplikasikan');
+                fb.innerHTML =
+                    `<i class="fa-solid fa-circle-check text-emerald-600 mr-1 text-sm"></i> <b>Tepat sekali!</b> Perhitunganmu akurat (${val} m). Kamu telah menguasai aplikasi nyata trigonometri surveyor.`;
+                if (!state.completedModules.includes('aplikasikan')) addXP(35, 'aplikasikan');
             } else {
                 fb.className = 'p-4 rounded-2xl text-xs font-semibold bg-amber-50 border border-amber-200 text-amber-800';
-                fb.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1 text-sm"></i> Belum tepat. Perhatikan kembali fungsi tangen atau cosinus yang digunakan serta penambahan tinggi mata pengamat jika ada.`;
+                fb.innerHTML =
+                    `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1 text-sm"></i> Belum tepat. Perhatikan kembali fungsi tangen atau cosinus yang digunakan serta penambahan tinggi mata pengamat jika ada.`;
             }
         }
-        function showHint() {
-            alert("Petunjuk: Gunakan Kalkulator Proses di menu samping untuk menghitung nilai tan/sin/cos dengan mudah lalu kalikan dengan jarak!");
-        }
 
-        // DUNIAWI VIEW (Misi 6)
+        function showHint() { alert(
+                "Petunjuk: Gunakan Kalkulator Proses di menu samping untuk menghitung nilai tan/sin/cos dengan mudah lalu kalikan dengan jarak!"
+                ); }
+
+        // ============================================================
+        //  DUNIAWI (Misi 6) – same
+        // ============================================================
         function getDuniawiHTML() {
             return `
-                <div class="space-y-6 max-w-4xl mx-auto">
-                    <div class="bg-rose-50 border border-rose-200 rounded-2xl p-6">
-                        <div class="flex items-center space-x-3 mb-2">
-                            <span class="bg-rose-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">D — DUNIAWI</span>
-                            <h3 class="font-extrabold text-rose-900 text-lg">Misi 6: Trigonometri di Berbagai Bidang Dunia Nyata</h3>
-                        </div>
-                        <p class="text-sm text-rose-800 leading-relaxed">Pilih salah satu bidang di bawah ini untuk melihat bagaimana trigonometri menjadi pilar utama kemajuan teknologi, arsitektur, dan sains modern.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Arsitektur & Konstruksi')">
-                            <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-building"></i></div>
-                            <h4 class="font-bold text-slate-900 mb-1">Arsitektur & Konstruksi</h4>
-                            <p class="text-xs text-slate-500">Menghitung kemiringan atap, beban struktur bangunan, dan kestabilan jembatan.</p>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Navigasi & GPS')">
-                            <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-compass"></i></div>
-                            <h4 class="font-bold text-slate-900 mb-1">Navigasi & GPS</h4>
-                            <p class="text-xs text-slate-500">Menentukan posisi koordinat kapal di laut dan pesawat terbang di udara menggunakan sudut satelit.</p>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Game Development')">
-                            <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-gamepad"></i></div>
-                            <h4 class="font-bold text-slate-900 mb-1">Game Development & Animasi</h4>
-                            <p class="text-xs text-slate-500">Memprogram arah gerak karakter 3D, sudut kamera, dan lintasan peluru dalam game engine.</p>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Astronomi')">
-                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-moon"></i></div>
-                            <h4 class="font-bold text-slate-900 mb-1">Astronomi & Parallax</h4>
-                            <p class="text-xs text-slate-500">Mengukur jarak antar bintang dan planet menggunakan metode paralaks sudut pandang.</p>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Teknologi Drone')">
-                            <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-drone"></i></div>
-                            <h4 class="font-bold text-slate-900 mb-1">Teknologi Drone & Pemetaan</h4>
-                            <p class="text-xs text-slate-500">Mengatur ketinggian terbang drone dan pemetaan kontur permukaan bumi secara otomatis.</p>
-                        </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Teknik Kelistrikan')">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-bolt"></i></div>
-                            <h4 class="font-bold text-slate-900 mb-1">Sinyal & Gelombang Listrik</h4>
-                            <p class="text-xs text-slate-500">Menganalisis arus bolak-balik (AC), gelombang radio, dan frekuensi telekomunikasi.</p>
-                        </div>
-                    </div>
-
-                    <div id="duniawi-detail-card" class="hidden bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-                        <h4 id="duniawi-detail-title" class="font-bold text-slate-900 text-base text-rose-600"></h4>
-                        <p id="duniawi-detail-desc" class="text-xs text-slate-600 leading-relaxed"></p>
-                    </div>
-
-                    <div class="flex justify-end pt-2">
-                        <button onclick="router.navigate('ukhrowi')" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow flex items-center space-x-2"><span>Lanjut ke Refleksi Ukhrowi</span> <i class="fa-solid fa-arrow-right"></i></button>
-                    </div>
+            <div class="space-y-6 max-w-4xl mx-auto">
+              <div class="bg-rose-50 border border-rose-200 rounded-2xl p-6">
+                <div class="flex items-center space-x-3 mb-2">
+                  <span class="bg-rose-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">D — DUNIAWI</span>
+                  <h3 class="font-extrabold text-rose-900 text-lg">Misi 6: Trigonometri di Berbagai Bidang Dunia Nyata</h3>
                 </div>
-            `;
+                <p class="text-sm text-rose-800 leading-relaxed">Pilih salah satu bidang di bawah ini untuk melihat bagaimana trigonometri menjadi pilar utama kemajuan teknologi, arsitektur, dan sains modern.</p>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Arsitektur & Konstruksi')">
+                  <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-building"></i></div>
+                  <h4 class="font-bold text-slate-900 mb-1">Arsitektur & Konstruksi</h4>
+                  <p class="text-xs text-slate-500">Menghitung kemiringan atap, beban struktur bangunan, dan kestabilan jembatan.</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Navigasi & GPS')">
+                  <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-compass"></i></div>
+                  <h4 class="font-bold text-slate-900 mb-1">Navigasi & GPS</h4>
+                  <p class="text-xs text-slate-500">Menentukan posisi koordinat kapal di laut dan pesawat terbang di udara menggunakan sudut satelit.</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Game Development')">
+                  <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-gamepad"></i></div>
+                  <h4 class="font-bold text-slate-900 mb-1">Game Development & Animasi</h4>
+                  <p class="text-xs text-slate-500">Memprogram arah gerak karakter 3D, sudut kamera, dan lintasan peluru dalam game engine.</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Astronomi')">
+                  <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-moon"></i></div>
+                  <h4 class="font-bold text-slate-900 mb-1">Astronomi & Parallax</h4>
+                  <p class="text-xs text-slate-500">Mengukur jarak antar bintang dan planet menggunakan metode paralaks sudut pandang.</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Teknologi Drone')">
+                  <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-drone"></i></div>
+                  <h4 class="font-bold text-slate-900 mb-1">Teknologi Drone & Pemetaan</h4>
+                  <p class="text-xs text-slate-500">Mengatur ketinggian terbang drone dan pemetaan kontur permukaan bumi secara otomatis.</p>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 hover:border-rose-500 shadow-sm cursor-pointer transition" onclick="showDuniawiDetail('Teknik Kelistrikan')">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mb-3"><i class="fa-solid fa-bolt"></i></div>
+                  <h4 class="font-bold text-slate-900 mb-1">Sinyal & Gelombang Listrik</h4>
+                  <p class="text-xs text-slate-500">Menganalisis arus bolak-balik (AC), gelombang radio, dan frekuensi telekomunikasi.</p>
+                </div>
+              </div>
+              <div id="duniawi-detail-card" class="hidden bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                <h4 id="duniawi-detail-title" class="font-bold text-slate-900 text-base text-rose-600"></h4>
+                <p id="duniawi-detail-desc" class="text-xs text-slate-600 leading-relaxed"></p>
+              </div>
+              <div class="flex justify-end pt-2">
+                <button onclick="router.navigate('ukhrowi')" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow flex items-center space-x-2"><span>Lanjut ke Refleksi Ukhrowi</span> <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          `;
         }
+
         function showDuniawiDetail(field) {
             const card = document.getElementById('duniawi-detail-card');
             card.classList.remove('hidden');
             document.getElementById('duniawi-detail-title').innerText = `Penerapan: ${field}`;
-            document.getElementById('duniawi-detail-desc').innerText = `Dalam bidang ${field}, trigonometri mutlak digunakan untuk menghitung parameter spasial secara presisi. Tanpa perhitungan sudut dan rasio sisi ini, teknologi modern seperti GPS, konstruksi gedung pencakar langit, hingga animasi CGI tidak akan dapat berfungsi dengan akurat.`;
+            document.getElementById('duniawi-detail-desc').innerText =
+                `Dalam bidang ${field}, trigonometri mutlak digunakan untuk menghitung parameter spasial secara presisi. Tanpa perhitungan sudut dan rasio sisi ini, teknologi modern seperti GPS, konstruksi gedung pencakar langit, hingga animasi CGI tidak akan dapat berfungsi dengan akurat.`;
         }
 
-        // UKHROWI VIEW (Misi 7)
+        // ============================================================
+        //  UKHROWI (Misi 7) – same
+        // ============================================================
         function getUkhrowiHTML() {
             return `
-                <div class="space-y-6 max-w-4xl mx-auto">
-                    <div class="bg-teal-50 border border-teal-200 rounded-2xl p-6">
-                        <div class="flex items-center space-x-3 mb-2">
-                            <span class="bg-teal-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">U — UKHROWI</span>
-                            <h3 class="font-extrabold text-teal-900 text-lg">Misi 7: Refleksi Keteraturan Ciptaan Allah SWT</h3>
-                        </div>
-                        <p class="text-sm text-teal-800 leading-relaxed">"Matematika membantu kita membaca keteraturan ciptaan Allah. Segala sesuatu di alam semesta diciptakan dengan ukuran, ketepatan, dan presisi yang luar biasa."</p>
-                    </div>
-
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
-                        <div class="bg-gradient-to-r from-teal-900 to-slate-900 text-white p-6 rounded-2xl relative overflow-hidden">
-                            <p class="text-xs text-teal-300 uppercase font-bold mb-1">Ayat Inspirasi</p>
-                            <p class="text-sm italic leading-relaxed text-teal-100">"Sesungguhnya Kami menciptakan segala sesuatu menurut ukuran." (QS. Al-Qamar: 49)</p>
-                        </div>
-
-                        <div class="space-y-4">
-                            <h4 class="font-bold text-slate-900 text-sm">Refleksi Pribadi Siswa:</h4>
-                            <div class="space-y-3">
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-700 mb-1">1. Nilai apa yang paling kamu rasakan saat mempelajari keteraturan hubungan sudut dan sisi dalam segitiga?</label>
-                                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                                        <button onclick="selectRefleksi(this, 'Ketelitian')" class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold hover:border-teal-500 transition text-center">Ketelitian</button>
-                                        <button onclick="selectRefleksi(this, 'Keteraturan')" class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold hover:border-teal-500 transition text-center">Keteraturan</button>
-                                        <button onclick="selectRefleksi(this, 'Kesabaran')" class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold hover:border-teal-500 transition text-center">Kesabaran</button>
-                                        <button onclick="selectRefleksi(this, 'Bersyukur')" class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold hover:border-teal-500 transition text-center">Bersyukur</button>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label class="block text-xs font-bold text-slate-700 mb-1">2. Bagaimana ilmu yang kamu pelajari hari ini dapat digunakan untuk memberi manfaat bagi sesama dan menjaga amanah?</label>
-                                    <textarea rows="3" placeholder="Tuliskan refleksimu di sini secara bebas dan jujur..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:border-teal-600"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button onclick="submitUkhrowi()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-xl transition text-sm shadow">Simpan Refleksi & Selesaikan Seluruh Misi</button>
-                    </div>
+            <div class="space-y-6 max-w-4xl mx-auto">
+              <div class="bg-teal-50 border border-teal-200 rounded-2xl p-6">
+                <div class="flex items-center space-x-3 mb-2">
+                  <span class="bg-teal-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">U — UKHROWI</span>
+                  <h3 class="font-extrabold text-teal-900 text-lg">Misi 7: Refleksi Keteraturan Ciptaan Allah SWT</h3>
                 </div>
-            `;
+                <p class="text-sm text-teal-800 leading-relaxed">"Matematika membantu kita membaca keteraturan ciptaan Allah. Segala sesuatu di alam semesta diciptakan dengan ukuran, ketepatan, dan presisi yang luar biasa."</p>
+              </div>
+              <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
+                <div class="bg-gradient-to-r from-teal-900 to-slate-900 text-white p-6 rounded-2xl relative overflow-hidden">
+                  <p class="text-xs text-teal-300 uppercase font-bold mb-1">Ayat Inspirasi</p>
+                  <p class="text-sm italic leading-relaxed text-teal-100">"Sesungguhnya Kami menciptakan segala sesuatu menurut ukuran." (QS. Al-Qamar: 49)</p>
+                </div>
+                <div class="space-y-4">
+                  <h4 class="font-bold text-slate-900 text-sm">Refleksi Pribadi Siswa:</h4>
+                  <div class="space-y-3">
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-1">1. Nilai apa yang paling kamu rasakan saat mempelajari keteraturan hubungan sudut dan sisi dalam segitiga?</label>
+                      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                        <button onclick="selectRefleksi(this, 'Ketelitian')" class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold hover:border-teal-500 transition text-center">Ketelitian</button>
+                        <button onclick="selectRefleksi(this, 'Keteraturan')" class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold hover:border-teal-500 transition text-center">Keteraturan</button>
+                        <button onclick="selectRefleksi(this, 'Kesabaran')" class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold hover:border-teal-500 transition text-center">Kesabaran</button>
+                        <button onclick="selectRefleksi(this, 'Bersyukur')" class="p-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold hover:border-teal-500 transition text-center">Bersyukur</button>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-1">2. Bagaimana ilmu yang kamu pelajari hari ini dapat digunakan untuk memberi manfaat bagi sesama dan menjaga amanah?</label>
+                      <textarea rows="3" placeholder="Tuliskan refleksimu di sini secara bebas dan jujur..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:border-teal-600"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <button onclick="submitUkhrowi()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-xl transition text-sm shadow">Simpan Refleksi & Selesaikan Seluruh Misi</button>
+              </div>
+            </div>
+          `;
         }
+
         function selectRefleksi(btn, val) {
             document.querySelectorAll('button').forEach(b => {
-                if(b.innerText === val) b.classList.toggle('bg-teal-50', 'border-teal-600', 'text-teal-700');
+                if (b.innerText === val) b.classList.toggle('bg-teal-50', 'border-teal-600', 'text-teal-700');
             });
             showToast(`Refleksi "${val}" dipilih!`);
         }
+
         function submitUkhrowi() {
-            addXP(50, 'ukhrowi');
+            if (!state.completedModules.includes('ukhrowi')) addXP(50, 'ukhrowi');
             alert("Alhamdulillah! Kamu telah menyelesaikan seluruh rangkaian Misi Petualangan Trigonometri TERPADU dengan sukses!");
             router.navigate('evaluasi');
         }
 
-        // EVALUASI FORMATIF VIEW
+        // ============================================================
+        //  EVALUASI – same
+        // ============================================================
         function getEvaluasiHTML() {
             return `
-                <div class="space-y-6 max-w-4xl mx-auto">
-                    <div class="bg-purple-50 border border-purple-200 rounded-2xl p-6">
-                        <div class="flex items-center space-x-3 mb-2">
-                            <span class="bg-purple-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">EVALUASI FORMATIF</span>
-                            <h3 class="font-extrabold text-purple-900 text-lg">Uji Pemahaman & Analisis Kesalahan</h3>
-                        </div>
-                        <p class="text-sm text-purple-800 leading-relaxed">Uji kemampuan konsep dan analisis penalaranmu tanpa takut salah. Sistem bantuan dan scaffolding siap mendampingimu.</p>
-                    </div>
-
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
-                        <div class="space-y-4">
-                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-                                <span class="text-xs font-bold px-2.5 py-1 bg-purple-100 text-purple-700 rounded-lg">Soal 1 • Analisis Kesalahan (Error Analysis)</span>
-                                <p class="text-xs text-slate-800 font-semibold mt-2">Seorang siswa menuliskan: <em>"sin θ = sisi samping / sisi miring"</em>. Menurutmu, apa kesalahan pada pernyataan tersebut?</p>
-                                <div class="space-y-2 pt-2 text-xs">
-                                    <label class="flex items-center space-x-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
-                                        <input type="radio" name="eval-1" value="salah" class="text-purple-600">
-                                        <span>Tidak ada kesalahan, itu sudah benar.</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
-                                        <input type="radio" name="eval-1" value="benar" class="text-purple-600">
-                                        <span>Keliru. Seharusnya sin θ adalah sisi depan / sisi miring, sedangkan samping / miring adalah cos θ.</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="eval-feedback" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
-
-                        <button onclick="checkEvaluasi()" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow">Kirim Evaluasi</button>
-                    </div>
+            <div class="space-y-6 max-w-4xl mx-auto">
+              <div class="bg-purple-50 border border-purple-200 rounded-2xl p-6">
+                <div class="flex items-center space-x-3 mb-2">
+                  <span class="bg-purple-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">EVALUASI FORMATIF</span>
+                  <h3 class="font-extrabold text-purple-900 text-lg">Uji Pemahaman & Analisis Kesalahan</h3>
                 </div>
-            `;
+                <p class="text-sm text-purple-800 leading-relaxed">Uji kemampuan konsep dan analisis penalaranmu tanpa takut salah. Sistem bantuan dan scaffolding siap mendampingimu.</p>
+              </div>
+              <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
+                <div class="space-y-4">
+                  <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 bg-purple-100 text-purple-700 rounded-lg">Soal 1 • Analisis Kesalahan (Error Analysis)</span>
+                    <p class="text-xs text-slate-800 font-semibold mt-2">Seorang siswa menuliskan: <em>"sin θ = sisi samping / sisi miring"</em>. Menurutmu, apa kesalahan pada pernyataan tersebut?</p>
+                    <div class="space-y-2 pt-2 text-xs">
+                      <label class="flex items-center space-x-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
+                        <input type="radio" name="eval-1" value="salah" class="text-purple-600">
+                        <span>Tidak ada kesalahan, itu sudah benar.</span>
+                      </label>
+                      <label class="flex items-center space-x-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100">
+                        <input type="radio" name="eval-1" value="benar" class="text-purple-600">
+                        <span>Keliru. Seharusnya sin θ adalah sisi depan / sisi miring, sedangkan samping / miring adalah cos θ.</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div id="eval-feedback" class="hidden p-4 rounded-2xl text-xs font-semibold"></div>
+                <button onclick="checkEvaluasi()" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow">Kirim Evaluasi</button>
+              </div>
+            </div>
+          `;
         }
+
         function initEvaluasiScript() {}
+
         function checkEvaluasi() {
             const radio = document.querySelector('input[name="eval-1"]:checked');
             const fb = document.getElementById('eval-feedback');
             fb.classList.remove('hidden');
-
-            if(radio && radio.value === 'benar') {
+            if (radio && radio.value === 'benar') {
                 fb.className = 'p-4 rounded-2xl text-xs font-semibold bg-emerald-50 border border-emerald-200 text-emerald-800';
-                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1 text-sm"></i> Analisismu sangat tajam! Kamu berhasil mendeteksi kekeliruan konsep dengan tepat.`;
-                addXP(40, 'evaluasi');
+                fb.innerHTML =
+                    `<i class="fa-solid fa-circle-check text-emerald-600 mr-1 text-sm"></i> Analisismu sangat tajam! Kamu berhasil mendeteksi kekeliruan konsep dengan tepat.`;
+                if (!state.completedModules.includes('evaluasi')) addXP(40, 'evaluasi');
             } else {
                 fb.className = 'p-4 rounded-2xl text-xs font-semibold bg-amber-50 border border-amber-200 text-amber-800';
-                fb.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1 text-sm"></i> Belum tepat. Ingat kembali bahwa sin berhubungan dengan sisi depan, sedangkan cos berhubungan dengan sisi samping.`;
+                fb.innerHTML =
+                    `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1 text-sm"></i> Belum tepat. Ingat kembali bahwa sin berhubungan dengan sisi depan, sedangkan cos berhubungan dengan sisi samping.`;
             }
         }
 
-        // KALKULATOR PROSES VIEW
+        // ============================================================
+        //  KALKULATOR – same
+        // ============================================================
         function getKalkulatorHTML() {
             return `
-                <div class="space-y-6 max-w-2xl mx-auto">
-                    <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl space-y-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-extrabold text-base flex items-center"><i class="fa-solid fa-calculator text-cyan-400 mr-2"></i> Kalkulator Proses Trigonometri</h3>
-                            <span class="text-[10px] bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded font-bold border border-cyan-500/30">Mode Pemahaman</span>
-                        </div>
-                        <p class="text-xs text-slate-300">Masukkan besar sudut dan pilih operasi untuk melihat rincian proses perhitungannya secara transparan.</p>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 mb-1">Besar Sudut (Derajat)</label>
-                                <input type="number" id="calc-angle-input" value="35" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm font-bold text-white focus:outline-none focus:border-cyan-400">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 mb-1">Pilih Fungsi</label>
-                                <select id="calc-func-select" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm font-bold text-white focus:outline-none focus:border-cyan-400">
-                                    <option value="sin">Sinus (sin)</option>
-                                    <option value="cos">Cosinus (cos)</option>
-                                    <option value="tan">Tangen (tan)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <button onclick="calculateProcess()" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-white font-bold py-3 rounded-xl transition text-sm shadow">Hitung dengan Proses</button>
-                    </div>
-
-                    <div id="calc-result-box" class="hidden bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-                        <h4 class="font-bold text-slate-900 text-sm">Hasil & Rincian Proses:</h4>
-                        <div id="calc-output-text" class="text-xs text-slate-700 bg-slate-50 p-4 rounded-2xl border border-slate-200 font-mono leading-relaxed"></div>
-                    </div>
+            <div class="space-y-6 max-w-2xl mx-auto">
+              <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl space-y-4">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-extrabold text-base flex items-center"><i class="fa-solid fa-calculator text-cyan-400 mr-2"></i> Kalkulator Proses Trigonometri</h3>
+                  <span class="text-[10px] bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded font-bold border border-cyan-500/30">Mode Pemahaman</span>
                 </div>
-            `;
+                <p class="text-xs text-slate-300">Masukkan besar sudut dan pilih operasi untuk melihat rincian proses perhitungannya secara transparan.</p>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Besar Sudut (Derajat)</label>
+                    <input type="number" id="calc-angle-input" value="35" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm font-bold text-white focus:outline-none focus:border-cyan-400">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Pilih Fungsi</label>
+                    <select id="calc-func-select" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm font-bold text-white focus:outline-none focus:border-cyan-400">
+                      <option value="sin">Sinus (sin)</option>
+                      <option value="cos">Cosinus (cos)</option>
+                      <option value="tan">Tangen (tan)</option>
+                    </select>
+                  </div>
+                </div>
+                <button onclick="calculateProcess()" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-white font-bold py-3 rounded-xl transition text-sm shadow">Hitung dengan Proses</button>
+              </div>
+              <div id="calc-result-box" class="hidden bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm">Hasil & Rincian Proses:</h4>
+                <div id="calc-output-text" class="text-xs text-slate-700 bg-slate-50 p-4 rounded-2xl border border-slate-200 font-mono leading-relaxed"></div>
+              </div>
+            </div>
+          `;
         }
+
         function initKalkulatorScript() {}
+
         function calculateProcess() {
             const angle = parseFloat(document.getElementById('calc-angle-input').value);
             const func = document.getElementById('calc-func-select').value;
             const box = document.getElementById('calc-result-box');
             const out = document.getElementById('calc-output-text');
             box.classList.remove('hidden');
-
             const rad = angle * (Math.PI / 180);
             let val = 0;
-            if(func === 'sin') val = Math.sin(rad);
-            else if(func === 'cos') val = Math.cos(rad);
+            if (func === 'sin') val = Math.sin(rad);
+            else if (func === 'cos') val = Math.cos(rad);
             else val = Math.tan(rad);
-
-            out.innerHTML = `Operasi: <strong>${func}(${angle}°)</strong><br>
-            Sudut dalam radian: ${rad.toFixed(4)} rad<br>
-            Hasil kalkulasi: <strong>${val.toFixed(4)}</strong><br><br>
-            <em>Catatan: Gunakan nilai ini untuk mencari panjang sisi dengan mengalikannya dengan sisi yang diketahui (misal: Sisi Depan = ${func}(${angle}°) × Sisi Miring).</em>`;
+            out.innerHTML =
+                `Operasi: <strong>${func}(${angle}°)</strong><br>Sudut dalam radian: ${rad.toFixed(4)} rad<br>Hasil kalkulasi: <strong>${val.toFixed(4)}</strong><br><br><em>Catatan: Gunakan nilai ini untuk mencari panjang sisi dengan mengalikannya dengan sisi yang diketahui (misal: Sisi Depan = ${func}(${angle}°) × Sisi Miring).</em>`;
         }
 
-        // Initialize on load
+        // ============================================================
+        //  INITIALIZATION
+        // ============================================================
+        function initApp() {
+            // check if user already logged in
+            const current = getCurrentUser();
+            if (current && current.name && current.class) {
+                const loaded = loadStudentData(current.name, current.class);
+                Object.assign(state, loaded);
+                document.getElementById('login-overlay').classList.add('hidden');
+                updateUI();
+                router.navigate('dashboard');
+            } else {
+                // show login
+                document.getElementById('login-overlay').classList.remove('hidden');
+                // ensure no stale state
+                Object.assign(state, { xp: 0, streak: 0, badges: 0, completedModules: [], userName: '', userClass: '' });
+                updateUI();
+            }
+
+            // Login form handler
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('login-name').value.trim();
+                const cls = document.getElementById('login-class').value.trim();
+                if (loginStudent(name, cls)) {
+                    // success, overlay hidden inside loginStudent
+                }
+            });
+
+            // Logout button
+            document.getElementById('logout-btn-header').addEventListener('click', function() {
+                if (confirm('Yakin ingin keluar? Progress akan tetap tersimpan.')) {
+                    logoutStudent();
+                }
+            });
+
+            // Sidebar toggle
+            document.getElementById('sidebar-toggle').addEventListener('click', function() {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('-translate-x-full');
+            });
+        }
+
+        // Override router.navigate to ensure state is saved on view change
+        const originalNavigate = router.navigate;
+        router.navigate = function(viewName) {
+            // save state before switching views
+            if (state.userName) saveStudentData(state);
+            originalNavigate.call(this, viewName);
+        };
+
+        // Start
         window.onload = function() {
-            router.navigate('dashboard');
-            updateStatsUI();
+            initApp();
         };
     </script>
 </body>
